@@ -1,5 +1,30 @@
 #' Title
 #'
+#' @param str
+#' @param indent
+#'
+#' @return
+#' @export
+#'
+#' @examples
+.add_parenth <- function(str, indent = TRUE)
+{
+    attrs <- attributes(str)
+
+    if (indent) {
+        str <- .indent(str, by = 1)
+    }
+
+    str <- paste0("(", str, ")")
+    attributes(str) <- attrs
+    # attr(str, "add_parenth") <- TRUE
+    return(str)
+}
+
+
+
+#' Title
+#'
 #' @param obj
 #' @param class
 #' @param tree
@@ -28,28 +53,31 @@
 #'
 #' @keywords internal
 #'
-.prefix_sql_callnames <- function(quo)
+.defuse_callnames <- function(quo)
 {
     assert_class(quo, classes = "quosure")
 
-    .prefix_calls <- function(call)
+    .defuse <- function(call)
     {
         nm <- rlang::call_name(call)
-        if (nm %in% .sql$keywords) {
+        if (!is.null(nm) && nm %in% .sql$keywords) {
             call <- .rename_call(call, name = paste0("sql_", nm))
+        } else if (!is.null(nm) && nm == "(") {
+            call <- .rename_call(call, ".sql_parenth")
         }
 
         # Apply to further calls within 'call'
-        calls <- sapply(call, rlang::is_call)
+        calls <- sapply(call, rlang::is_call,
+                        name = c(.sql$allfuns, .sql$keywords, "("))
         if (sum(calls) > 0) {
-            call[calls] <- lapply(call[calls], .prefix_calls)
+            call[calls] <- lapply(call[calls], .defuse)
         }
 
         return(call)
     }
 
     call <- rlang::quo_get_expr(quo)
-    quo <- rlang::quo_set_expr(quo, .prefix_calls(call))
+    quo <- rlang::quo_set_expr(quo, .defuse(call))
 
     return(quo)
 }
@@ -161,7 +189,7 @@
 #'
 .rename_call <- function(call, name)
 {
-    assert_class(call, classes = "call")
+    assert_multi_class(call, classes = c("call", "("))
     assert_string(name, min.chars = 1)
 
     call[[1]] <- sym(name)

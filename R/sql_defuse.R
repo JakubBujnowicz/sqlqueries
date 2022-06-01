@@ -7,7 +7,7 @@
     # Replacing shortened SQL calls
     sql_calls <- sapply(exprs, rlang::is_call)
     if (prefix_sql && sum(sql_calls) > 0) {
-        qs[sql_calls] <- lapply(qs[sql_calls], .prefix_sql_callnames)
+        qs[sql_calls] <- lapply(qs[sql_calls], .defuse_callnames)
     }
 
     ev_exprs <- lapply(qs, rlang::eval_tidy)

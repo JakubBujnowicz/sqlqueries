@@ -48,28 +48,17 @@ NULL
 #' @keywords internal
 #'
 .parse_logical <- function(x, keyword,
-                           level = 0L,
+                           level,
                            ...)
 {
     attrs <- attributes(x)
     tree <- attrs$tree
 
-    # Set level to 0 if X and Y are simple, not SQL strings and parenthesis are
-    # on
-    if (attrs$add_parenth && !is_sql(tree$x) && !is_sql(tree$y)) {
-        level <- 0L
-    }
-
     sep <- ifelse(level >= 1L, "\n", " ")
     sep <- paste0(sep, keyword, " ")
 
-    rslt <- paste(.sql_parse(tree$x, level = level + 1L),
-                  .sql_parse(tree$y, level = level + 1L),
-                  sep = sep)
-
-    if (attrs$add_parenth) {
-        rslt <- paste0("(", .indent(rslt, by = 1L), ")")
-    }
+    tree <- lapply(tree, .sql_parse, level = level + 1L)
+    rslt <- do.call(paste, args = c(tree, sep = sep))
 
     attributes(rslt) <- attrs
     return(rslt)

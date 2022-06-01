@@ -8,11 +8,11 @@
 \alias{\%OR\%}
 \title{Title}
 \usage{
-sql_and(x, y)
+sql_and(x, y, add_parenth = TRUE)
 
 x \%AND\% y
 
-sql_or(x, y)
+sql_or(x, y, add_parenth = TRUE)
 
 x \%OR\% y
 }

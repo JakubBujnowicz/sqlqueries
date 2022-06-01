@@ -15,4 +15,7 @@ NULL
                    keywords <- c("query", "select", "from", "where",
                                  "and", "or", "vars")
                    keyfuns <- paste0("sql_", keywords)
+                   infix_funs <- paste0("%", c("OR", "AND"), "%")
+                   allfuns <- c(keyfuns, infix_funs,
+                                ".sql_parenth")
                })
