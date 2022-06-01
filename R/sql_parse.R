@@ -10,19 +10,9 @@
 #'
 .sql_parse <- function(x, ...)
 {
-    UseMethod(".sql_parse")
-}
+    if (!is_sql(x) && test_string(x)) {
+        return(x)
+    }
 
-#' Title
-#'
-#' @param x
-#' @param ...
-#'
-#' @return
-#'
-#' @keywords internal
-#'
-.sql_parse.default <- function(x, ...)
-{
-    x
+    UseMethod(".sql_parse")
 }

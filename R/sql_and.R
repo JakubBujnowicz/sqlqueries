@@ -1,17 +1,24 @@
 #' @rdname sql_logical
 #' @export
 #'
-sql_and <- function(x, y)
+sql_and <- function(x, y, add_parenth = TRUE)
 {
     rslt <- .new_logical(x = x, y = y,
-                         keyword = "and")
+                         keyword = "and",
+                         add_parent = add_parenth)
     return(rslt)
 }
 
 #' @rdname sql_logical
 #' @export
 #'
-`%AND%` <- sql_and
+`%AND%` <- function(x, y)
+{
+    rslt <- .new_logical(x = x, y = y,
+                         keyword = "and",
+                         add_parent = FALSE)
+    return(rslt)
+}
 
 #' Title
 #'

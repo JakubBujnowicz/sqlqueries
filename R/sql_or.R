@@ -1,10 +1,11 @@
 #' @rdname sql_logical
 #' @export
 #'
-sql_or <- function(x, y)
+sql_or <- function(x, y, add_parenth = TRUE)
 {
     rslt <- .new_logical(x = x, y = y,
-                         keyword = "or")
+                         keyword = "or",
+                         add_parenth = add_parenth)
     return(rslt)
 }
 
@@ -12,7 +13,13 @@ sql_or <- function(x, y)
 #' @rdname sql_logical
 #' @export
 #'
-`%OR%` <- sql_or
+`%OR%` <- function(x, y)
+{
+    rslt <- .new_logical(x = x, y = y,
+                         keyword = "or",
+                         add_parenth = FALSE)
+    return(rslt)
+}
 
 
 #' Title
@@ -25,13 +32,9 @@ sql_or <- function(x, y)
 #'
 #' @keywords internal
 #'
-.sql_parse.sql_or <- function(x, level = 0, add_parenth = FALSE,
+.sql_parse.sql_or <- function(x, level = 0,
                               ...)
 {
-    parenth_tester <- function(x) inherits(x, what = "sql_and")
-    rslt <- .parse_logical(x, keyword = "OR", level = level,
-                           add_parenth_x = parenth_tester,
-                           add_parenth_y = parenth_tester,
-                           ...)
+    rslt <- .parse_logical(x, keyword = "OR", level = level, ...)
     return(rslt)
 }

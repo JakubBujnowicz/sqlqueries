@@ -1,13 +1,13 @@
-.sql_defuse <- function(..., sql_like = TRUE)
+.sql_defuse <- function(..., sql_like = TRUE, prefix_sql = TRUE)
 {
     qs <- rlang::enquos(...)
     exprs <- lapply(qs, rlang::quo_get_expr)
     exprs_raw <- lapply(exprs, deparse)
 
     # Replacing shortened SQL calls
-    sql_calls <- sapply(exprs, rlang::is_call, name = .sql$keywords)
-    if (sum(sql_calls) > 0) {
-        qs[sql_calls] <- lapply(qs[sql_calls], .fill_sql_callname)
+    sql_calls <- sapply(exprs, rlang::is_call)
+    if (prefix_sql && sum(sql_calls) > 0) {
+        qs[sql_calls] <- lapply(qs[sql_calls], .prefix_sql_callnames)
     }
 
     ev_exprs <- lapply(qs, rlang::eval_tidy)

@@ -4,7 +4,7 @@
 \alias{.sql_parse.sql_or}
 \title{Title}
 \usage{
-\method{.sql_parse}{sql_or}(x, level = 0, add_parenth = FALSE, ...)
+\method{.sql_parse}{sql_or}(x, level = 0, ...)
 }
 \arguments{
 \item{...}{}

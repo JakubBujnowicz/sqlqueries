@@ -6,9 +6,10 @@
 #' @export
 #'
 #' @examples
-sql_where <- function(condition)
+sql_where <- function(...)
 {
-    assert_string(condition, min.chars = 1)
+    condition <- .sql_defuse(...)
+    condition <- Reduce(`%AND%`, condition)
 
     rslt <- .new_sql(class = "sql_where",
                      tree = list(condition = condition)) |>

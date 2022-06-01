@@ -4,7 +4,7 @@
 \alias{.new_logical}
 \title{Title}
 \usage{
-.new_logical(x, y, keyword, ...)
+.new_logical(x, y, keyword, add_parenth, ...)
 }
 \arguments{
 \item{keyword}{}

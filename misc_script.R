@@ -8,13 +8,17 @@ load_all()
 
 # FROM -------------------------------------------------------------------------
 (fr <- sql_from("table"))
-sql_from("table", alias = "dupa")
+sql_from("table", alias = "d")
 sql_from(sql(select("*"),
-             from("dupa")),
+             from("d")),
          alias = "a")
 
 # WHERE ------------------------------------------------------------------------
-(wh <- sql_where("x = 10" %AND% "y = 11" %OR% "z = 12" %AND% "w = 13"))
+(wh <- sql_where(and("x = 10",
+                     "y = 11") %OR%
+                     and("z = 12",
+                         "w = 13"))
+)
 
 # QUERY ------------------------------------------------------------------------
 (qr <- sql_query(select(stringr::words[1:3]),
@@ -22,7 +26,7 @@ sql_from(sql(select("*"),
                  wh,
                  "TEST"))
 sql(sel, fr)
-sel + fr
+sel + fr + wh
 
 sql_from(qr)
 sql_query(qr)

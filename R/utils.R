@@ -28,14 +28,28 @@
 #'
 #' @keywords internal
 #'
-.fill_sql_callname <- function(quo)
+.prefix_sql_callnames <- function(quo)
 {
     assert_class(quo, classes = "quosure")
 
+    .prefix_calls <- function(call)
+    {
+        nm <- rlang::call_name(call)
+        if (nm %in% .sql$keywords) {
+            call <- .rename_call(call, name = paste0("sql_", nm))
+        }
+
+        # Apply to further calls within 'call'
+        calls <- sapply(call, rlang::is_call)
+        if (sum(calls) > 0) {
+            call[calls] <- lapply(call[calls], .prefix_calls)
+        }
+
+        return(call)
+    }
+
     call <- rlang::quo_get_expr(quo)
-    nm <- rlang::call_name(call)
-    call <- .rename_call(call, name = paste0("sql_", nm))
-    quo <- rlang::quo_set_expr(quo, call)
+    quo <- rlang::quo_set_expr(quo, .prefix_calls(call))
 
     return(quo)
 }

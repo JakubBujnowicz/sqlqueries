@@ -4,15 +4,7 @@
 \alias{.parse_logical}
 \title{Title}
 \usage{
-.parse_logical(
-  x,
-  keyword,
-  level = 0,
-  add_parenth = FALSE,
-  add_parenth_x = FALSE,
-  add_parenth_y = FALSE,
-  ...
-)
+.parse_logical(x, keyword, level = 0L, ...)
 }
 \arguments{
 \item{...}{}
