@@ -6,11 +6,11 @@
 #' @export
 #'
 #' @examples
-sql_where <- function(..., defuse = TRUE)
+sql_where <- function(..., .defuse = TRUE)
 {
     assert_flag(defuse)
 
-    condition <- .sql_prepare(..., defuse = defuse)
+    condition <- .sql_prepare(..., defuse = .defuse)
     condition <- Reduce(sql_and, condition)
 
     rslt <- .new_sql(class = "sql_where",

@@ -1,14 +1,14 @@
-sql_select <- function(..., distinct = FALSE, defuse = TRUE)
+sql_select <- function(..., .distinct = FALSE, .defuse = TRUE)
 {
-    assert_flag(defuse)
+    assert_flag(.defuse)
+    assert_flag(.distinct)
 
-    x <- unlist(.sql_prepare(..., defuse = defuse, sql_like = FALSE))
+    x <- unlist(.sql_prepare(..., defuse = .defuse, sql_like = FALSE))
     assert_character(x, any.missing = FALSE,
                      min.chars = 1,
                      min.len = 1,
                      unique = TRUE,
                      .var.name = "...")
-    assert_flag(distinct)
 
     nms <- names(x)
     if (!is.null(nms)) {
@@ -25,7 +25,7 @@ sql_select <- function(..., distinct = FALSE, defuse = TRUE)
 
     rslt <- .new_sql(class = "sql_select",
                      tree = list(columns = x,
-                                 distinct = distinct)) |>
+                                 distinct = .distinct)) |>
         .sql_parse()
     return(rslt)
 }

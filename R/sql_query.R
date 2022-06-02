@@ -6,11 +6,11 @@
 #' @export
 #'
 #' @examples
-sql_query <- function(..., defuse = TRUE)
+sql_query <- function(..., .defuse = TRUE)
 {
     assert_flag(defuse)
 
-    ev_exprs <- .sql_prepare(..., defuse = defuse)
+    ev_exprs <- .sql_prepare(..., defuse = .defuse)
 
     # Set names
     nms <- sapply(ev_exprs, .mclass)
