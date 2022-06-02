@@ -4,10 +4,10 @@
 \alias{.sql_parse.sql_from}
 \title{Title}
 \usage{
-\method{.sql_parse}{sql_from}(x, level = 0, add_parenth = TRUE, ...)
+\method{.sql_parse}{sql_from}(x, ...)
 }
 \arguments{
-\item{level}{}
+\item{...}{}
 }
 \description{
 Title

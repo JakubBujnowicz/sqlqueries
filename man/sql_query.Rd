@@ -5,9 +5,9 @@
 \alias{sql}
 \title{Title}
 \usage{
-sql_query(...)
+sql_query(..., defuse = TRUE)
 
-sql(...)
+sql(..., defuse = TRUE)
 }
 \arguments{
 \item{...}{}

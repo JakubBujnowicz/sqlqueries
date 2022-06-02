@@ -4,7 +4,7 @@
 \alias{.sql_parenth}
 \title{Title}
 \usage{
-.sql_parenth(...)
+.sql_parenth(x)
 }
 \arguments{
 \item{...}{}

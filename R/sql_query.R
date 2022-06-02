@@ -6,9 +6,11 @@
 #' @export
 #'
 #' @examples
-sql_query <- function(...)
+sql_query <- function(..., defuse = TRUE)
 {
-    ev_exprs <- .sql_defuse(...)
+    assert_flag(defuse)
+
+    ev_exprs <- .sql_prepare(..., defuse = defuse)
 
     # Set names
     nms <- sapply(ev_exprs, .mclass)
@@ -28,26 +30,17 @@ sql <- sql_query
 #' Title
 #'
 #' @param x
-#' @param level
 #' @param ...
 #'
 #' @return
 #' @export
 #'
 #' @examples
-.sql_parse.sql_query <- function(x, level = 0, add_parenth = FALSE, ...)
+.sql_parse.sql_query <- function(x, ...)
 {
     attrs <- attributes(x)
 
-    rslt <- lapply(attrs$tree, .sql_parse,
-                   level = level + 1,
-                   # add_space = level >= 1,
-                   add_parenth = level >= 1)
-    rslt <- do.call(paste0, args = list(rslt, collapse = "\n"))
-
-    if (add_parenth) {
-        rslt <- paste0("(", .indent(rslt, by = 1), ")")
-    }
+    rslt <- do.call(paste0, args = list(attrs$tree, collapse = "\n"))
 
     attributes(rslt) <- attrs
     return(rslt)

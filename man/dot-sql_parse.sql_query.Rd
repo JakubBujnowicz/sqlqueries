@@ -4,7 +4,7 @@
 \alias{.sql_parse.sql_query}
 \title{Title}
 \usage{
-\method{.sql_parse}{sql_query}(x, level = 0, add_parenth = FALSE, ...)
+\method{.sql_parse}{sql_query}(x, ...)
 }
 \arguments{
 \item{...}{}

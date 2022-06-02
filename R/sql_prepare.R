@@ -1,19 +1,27 @@
-.sql_defuse <- function(..., sql_like = TRUE, prefix_sql = TRUE)
+.sql_prepare <- function(..., defuse = TRUE, sql_like = TRUE,
+                         keep = "sql")
 {
-    qs <- rlang::enquos(...)
-    exprs <- lapply(qs, rlang::quo_get_expr)
-    exprs_raw <- lapply(exprs, deparse)
+    if (defuse) {
+        message("Defusing")
+        qs <- rlang::enquos(...)
+        exprs <- lapply(qs, rlang::quo_get_expr)
+        exprs_raw <- lapply(exprs, deparse)
 
-    # Replacing shortened SQL calls
-    sql_calls <- sapply(exprs, rlang::is_call)
-    if (prefix_sql && sum(sql_calls) > 0) {
-        qs[sql_calls] <- lapply(qs[sql_calls], .defuse_callnames)
+        # Defusing & replacing shortened SQL calls
+        sql_calls <- sapply(exprs, rlang::is_call)
+        if (sum(sql_calls) > 0) {
+            qs[sql_calls] <- lapply(qs[sql_calls], .defuse_calls)
+        }
+
+        ev_exprs <- lapply(qs, rlang::eval_tidy)
+
+    } else {
+        ev_exprs <- list(...)
+        exprs_raw <- rlang::enexprs(...)
     }
 
-    ev_exprs <- lapply(qs, rlang::eval_tidy)
-
     if (sql_like) {
-        sql_objs <- sapply(ev_exprs, inherits, what = "sql")
+        sql_objs <- sapply(ev_exprs, inherits, what = keep)
         chosen <- sql_objs | sapply(ev_exprs, test_string,
                                     min.chars = 1)
     } else {
@@ -26,7 +34,8 @@
     not_sql <- sapply(exprs_raw[!chosen], deparse)
     if (length(not_sql) > 0) {
         warning("the following expressions were omitted:\n",
-                toString(not_sql))
+                toString(not_sql),
+                call. = FALSE)
         ev_exprs <- ev_exprs[chosen]
     }
 
@@ -34,7 +43,7 @@
         stop("no SQL functions nor objects passed")
     }
 
-    # Extend inserted SQL queries of the first level
+    # Extend directly supplied SQL queries
     queries <- which(sapply(ev_exprs, inherits, what = "sql_query"))
     if (length(queries) > 0) {
         ev_exprs <- .replace_list(x = ev_exprs,

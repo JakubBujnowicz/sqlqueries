@@ -1,6 +1,8 @@
-sql_select <- function(..., distinct = FALSE)
+sql_select <- function(..., distinct = FALSE, defuse = TRUE)
 {
-    x <- unlist(.sql_defuse(..., sql_like = FALSE))
+    assert_flag(defuse)
+
+    x <- unlist(.sql_prepare(..., defuse = defuse, sql_like = FALSE))
     assert_character(x, any.missing = FALSE,
                      min.chars = 1,
                      min.len = 1,
@@ -39,8 +41,7 @@ sql_select <- function(..., distinct = FALSE)
 #'
 #' @keywords internal
 #'
-.sql_parse.sql_select <- function(x, level = 0,
-                                  ...)
+.sql_parse.sql_select <- function(x, ...)
 {
     attrs <- attributes(x)
     tree <- attrs$tree

@@ -6,10 +6,12 @@
 #' @export
 #'
 #' @examples
-sql_where <- function(...)
+sql_where <- function(..., defuse = TRUE)
 {
-    condition <- .sql_defuse(...)
-    condition <- Reduce(`%AND%`, condition)
+    assert_flag(defuse)
+
+    condition <- .sql_prepare(..., defuse = defuse)
+    condition <- Reduce(sql_and, condition)
 
     rslt <- .new_sql(class = "sql_where",
                      tree = list(condition = condition)) |>
@@ -27,13 +29,11 @@ sql_where <- function(...)
 #'
 #' @keywords internal
 #'
-.sql_parse.sql_where <- function(x, level = 0,
-                                  ...)
+.sql_parse.sql_where <- function(x, ...)
 {
     attrs <- attributes(x)
 
-    rslt <- .sql_parse(attrs$tree$condition, level = level + 1)
-    rslt <- paste("WHERE", rslt, sep = "\n") |>
+    rslt <- paste("WHERE", attrs$tree$condition, sep = "\n") |>
         .indent(by = 4)
 
     attributes(rslt) <- attrs

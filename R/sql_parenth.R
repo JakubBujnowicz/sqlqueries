@@ -6,10 +6,10 @@
 #'
 #' @keywords internal
 #'
-.sql_parenth <- function(...)
+.sql_parenth <- function(x)
 {
     rslt <- .new_sql(class = "sql_parenth",
-                     tree = list(elements = list(...)))
+                     tree = list(contains = x))
     rslt <- .sql_parse(rslt)
     return(rslt)
 }
@@ -27,13 +27,15 @@
 .sql_parse.sql_parenth <- function(x, ...)
 {
     attrs <- attributes(x)
-    tree <- attrs$tree
-    n <- length(tree)
-    level <- as.integer(n > 2)
-    # print(setNames(lapply(tree$elements, unclass), n))
+    contains <- attrs$tree$contains
 
-    rslt <- sapply(tree$elements, .sql_parse, level = level)
-    rslt <- paste0("(", rslt, ")") |>
+    if (inherits(contains, "sql_condition")) {
+        operators <- attr(contains, "tree", exact = TRUE)$operators
+        n <- length(operators)
+        contains <- .sql_parse(contains, break_lines = n >= 2)
+    }
+
+    rslt <- paste0("(", contains, ")", collapse = "") |>
         .indent(by = 1)
 
     attributes(rslt) <- attrs

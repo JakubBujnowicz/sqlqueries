@@ -10,7 +10,8 @@
 #'
 .sql_parse <- function(x, ...)
 {
-    if (!is_sql(x) && test_string(x)) {
+    message("Parsing: ", .mclass(x), "...")
+        if (!is_sql(x) && test_string(x)) {
         return(x)
     }
 

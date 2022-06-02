@@ -23,5 +23,5 @@ print.sql <- function(x, ...)
 #' @examples
 `+.sql` <- function(e1, e2)
 {
-    sql_query(e1, e2)
+    sql_query(e1, e2, defuse = FALSE)
 }

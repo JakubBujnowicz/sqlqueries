@@ -24,27 +24,23 @@ sql_from <- function(table, alias = NULL)
 #'
 #' @param x
 #' @param ...
-#' @param level
 #'
 #' @return
 #' @export
 #'
 #' @keywords internal
 #'
-.sql_parse.sql_from <- function(x, level = 0,
-                                add_parenth = TRUE,
-                                ...)
+.sql_parse.sql_from <- function(x, ...)
 {
-    assert_count(level)
-
     attrs <- attributes(x)
     tree <- attrs$tree
 
-    tab_name <- names(tree$table)
+    rslt <- tree$table
+    if (inherits(rslt, "sql_query")) {
+        rslt <- .add_parenth(rslt)
+    }
 
-    rslt <- .sql_parse(tree$table,
-                       level = level + 1,
-                       add_parenth = TRUE)
+    tab_name <- names(tree$table)
     if (!is.null(tree$alias)) {
         rslt <- paste0(rslt, " AS ", tree$alias)
     } else if (test_string(tab_name, min.chars = 1)) {

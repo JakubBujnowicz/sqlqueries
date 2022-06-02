@@ -4,7 +4,7 @@
 \alias{.sql_parse.sql_parenth}
 \title{Title}
 \usage{
-\method{.sql_parse}{sql_parenth}(x, level = 0, ...)
+\method{.sql_parse}{sql_parenth}(x, ...)
 }
 \arguments{
 \item{...}{}

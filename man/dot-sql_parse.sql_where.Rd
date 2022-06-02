@@ -4,7 +4,7 @@
 \alias{.sql_parse.sql_where}
 \title{Title}
 \usage{
-\method{.sql_parse}{sql_where}(x, level = 0, ...)
+\method{.sql_parse}{sql_where}(x, ...)
 }
 \arguments{
 \item{...}{}

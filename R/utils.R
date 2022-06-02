@@ -53,9 +53,17 @@
 #'
 #' @keywords internal
 #'
-.defuse_callnames <- function(quo)
+.defuse_calls <- function(quo)
 {
     assert_class(quo, classes = "quosure")
+
+    .cancel_defusing <- function(call)
+    {
+        nm <- rlang::call_name(call)
+        call <- rlang::call_match(call, fn = get(nm), defaults = TRUE)
+        call$defuse <- FALSE
+        return(call)
+    }
 
     .defuse <- function(call)
     {
@@ -64,6 +72,13 @@
             call <- .rename_call(call, name = paste0("sql_", nm))
         } else if (!is.null(nm) && nm == "(") {
             call <- .rename_call(call, ".sql_parenth")
+        }
+
+        # First defusing takes care of every call in the call tree,
+        # so no need to do it again
+        defusable <- rlang::is_call(call, name = .sql$defusables)
+        if (defusable) {
+            call <- .cancel_defusing(call)
         }
 
         # Apply to further calls within 'call'

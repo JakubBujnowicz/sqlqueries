@@ -4,7 +4,7 @@
 \alias{sql_where}
 \title{Title}
 \usage{
-sql_where(...)
+sql_where(..., defuse = TRUE)
 }
 \arguments{
 \item{condition}{}

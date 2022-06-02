@@ -1,11 +1,10 @@
 #' @rdname sql_logical
 #' @export
 #'
-sql_and <- function(x, y, add_parenth = TRUE)
+sql_and <- function(x, y)
 {
-    rslt <- .new_logical(x = x, y = y,
-                         keyword = "and",
-                         add_parent = add_parenth)
+    rslt <- .new_condition(x = x, y = y,
+                           operator = "and")
     return(rslt)
 }
 
@@ -14,25 +13,7 @@ sql_and <- function(x, y, add_parenth = TRUE)
 #'
 `%AND%` <- function(x, y)
 {
-    rslt <- .new_logical(x = x, y = y,
-                         keyword = "and",
-                         add_parent = FALSE)
-    return(rslt)
-}
-
-#' Title
-#'
-#' @param x
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @keywords internal
-#'
-.sql_parse.sql_and <- function(x, level = 0,
-                               ...)
-{
-    rslt <- .parse_logical(x, keyword = "AND", level = level, ...)
+    rslt <- .new_condition(x = x, y = y,
+                           operator = "and")
     return(rslt)
 }

@@ -4,7 +4,7 @@
 \alias{.sql_parse.sql_select}
 \title{Title}
 \usage{
-\method{.sql_parse}{sql_select}(x, level = 0, ...)
+\method{.sql_parse}{sql_select}(x, ...)
 }
 \arguments{
 \item{...}{}
