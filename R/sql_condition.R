@@ -44,7 +44,14 @@
 
     rslt <- tree$elements[[1]]
     for (i in seq_len(n)) {
-        rslt <- paste0(rslt, sep[i], tree$elements[[i + 1]])
+        curr <- tree$elements[[i + 1]]
+        if (inherits(curr, "sql_parenth")) {
+
+            # Indent by the width of the operator
+            curr <- .indent(curr, by = nchar(sep[i]) - 1)
+        }
+
+        rslt <- paste0(rslt, sep[i], curr)
     }
 
     attributes(rslt) <- attrs

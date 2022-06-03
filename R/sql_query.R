@@ -8,7 +8,7 @@
 #' @examples
 sql_query <- function(..., .defuse = TRUE)
 {
-    assert_flag(defuse)
+    assert_flag(.defuse)
 
     ev_exprs <- .sql_prepare(..., defuse = .defuse)
 

@@ -61,7 +61,7 @@
     {
         nm <- rlang::call_name(call)
         call <- rlang::call_match(call, fn = get(nm), defaults = TRUE)
-        call$defuse <- FALSE
+        call$`.defuse` <- FALSE
         return(call)
     }
 

@@ -8,7 +8,7 @@
 #' @examples
 sql_where <- function(..., .defuse = TRUE)
 {
-    assert_flag(defuse)
+    assert_flag(.defuse)
 
     condition <- .sql_prepare(..., defuse = .defuse)
     condition <- Reduce(sql_and, condition)
