@@ -3,8 +3,8 @@
 #'
 sql_and <- function(x, y)
 {
-    rslt <- .new_condition(x = x, y = y,
-                           operator = "and")
+    rslt <- .new_logical(x = x, y = y,
+                         operator = "and")
     return(rslt)
 }
 
@@ -13,7 +13,7 @@ sql_and <- function(x, y)
 #'
 `%AND%` <- function(x, y)
 {
-    rslt <- .new_condition(x = x, y = y,
-                           operator = "and")
+    rslt <- .new_logical(x = x, y = y,
+                         operator = "and")
     return(rslt)
 }

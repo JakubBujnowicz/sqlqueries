@@ -29,7 +29,7 @@
     attrs <- attributes(x)
     contains <- attrs$tree$contains
 
-    if (inherits(contains, "sql_condition")) {
+    if (inherits(contains, "sql_logical")) {
         operators <- attr(contains, "tree", exact = TRUE)$operators
         n <- length(operators)
         contains <- .sql_parse(contains, break_lines = n >= 2)

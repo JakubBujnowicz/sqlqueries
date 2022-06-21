@@ -1,4 +1,4 @@
-.new_condition <- function(x, y, operator)
+.new_logical <- function(x, y, operator)
 {
     xtree <- attr(x, "tree", exact = TRUE)
     ytree <- attr(y, "tree", exact = TRUE)
@@ -13,7 +13,7 @@
         yval <- list(y)
     }
 
-    rslt <- .new_sql(class = "sql_condition",
+    rslt <- .new_sql(class = "sql_logical",
                      tree = list(elements = c(xval, yval),
                                  operators = c(xtree$operators,
                                                operator,
@@ -33,7 +33,7 @@
 #'
 #' @keywords internal
 #'
-.sql_parse.sql_condition <- function(x, break_lines = TRUE, ...)
+.sql_parse.sql_logical <- function(x, break_lines = TRUE, ...)
 {
     attrs <- attributes(x)
     tree <- attrs$tree

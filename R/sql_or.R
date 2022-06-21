@@ -3,8 +3,8 @@
 #'
 sql_or <- function(x, y)
 {
-    rslt <- .new_condition(x = x, y = y,
-                           operator = "or")
+    rslt <- .new_logical(x = x, y = y,
+                         operator = "or")
     return(rslt)
 }
 
@@ -14,7 +14,7 @@ sql_or <- function(x, y)
 #'
 `%OR%` <- function(x, y)
 {
-    rslt <- .new_condition(x = x, y = y,
-                           operator = "or")
+    rslt <- .new_logical(x = x, y = y,
+                         operator = "or")
     return(rslt)
 }
