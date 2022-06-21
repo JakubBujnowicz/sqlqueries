@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-sql_query <- function(..., .defuse = TRUE)
+sql_query <- function(..., .glue = NULL, .defuse = TRUE)
 {
     assert_flag(.defuse)
 
@@ -19,8 +19,14 @@ sql_query <- function(..., .defuse = TRUE)
     rslt <- .new_sql(class = "sql_query",
                      tree = ev_exprs) |>
         .sql_parse()
+
+    if (!is.null(.glue)) {
+        rslt <- sql_glue(rslt, .x = .glue)
+    }
+
     return(rslt)
 }
+
 
 #' @rdname sql_query
 #'
@@ -36,7 +42,7 @@ sql <- sql_query
 #' @export
 #'
 #' @examples
-.sql_parse.sql_query <- function(x, ...)
+.sql_parse.sql_query <- function(x, glue, ...)
 {
     attrs <- attributes(x)
 

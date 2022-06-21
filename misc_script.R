@@ -4,6 +4,7 @@ load_all()
 # SELECT -----------------------------------------------------------------------
 (sel <- sql_select(stringr::words[1:3],
                    A = "asdasd",
+                   glued = "{variable}",
                    vars(Variable, SV = SecondVar)))
 
 
@@ -28,7 +29,7 @@ sql_from(sql(select("*"),
                  from("table", alias = "a"),
                  wh,
                  "TEST"))
-sql(sel, fr)
+sql(sel, fr, .glue = list(variable = "glued_var"))
 sel + fr + wh
 
 sql_from(qr)

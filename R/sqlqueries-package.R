@@ -4,6 +4,7 @@
 ## usethis namespace: start
 #' @import checkmate
 #' @import rlang
+#' @importFrom glue glue_data
 #' @importFrom stringr str_remove
 #' @importFrom stringr str_replace_all
 ## usethis namespace: end
