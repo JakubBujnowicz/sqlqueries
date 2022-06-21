@@ -25,8 +25,8 @@ sql_select <- function(..., .distinct = FALSE, .defuse = TRUE)
 
     rslt <- .new_sql(class = "sql_select",
                      tree = list(columns = x,
-                                 distinct = .distinct)) |>
-        .sql_parse()
+                                 distinct = .distinct))
+    rslt <- .sql_parse(rslt)
     return(rslt)
 }
 

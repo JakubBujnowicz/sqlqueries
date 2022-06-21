@@ -14,8 +14,8 @@ sql_where <- function(..., .defuse = TRUE)
     condition <- Reduce(sql_and, condition)
 
     rslt <- .new_sql(class = "sql_where",
-                     tree = list(condition = condition)) |>
-        .sql_parse()
+                     tree = list(condition = condition))
+    rslt <- .sql_parse(rslt)
     return(rslt)
 }
 
@@ -33,8 +33,8 @@ sql_where <- function(..., .defuse = TRUE)
 {
     attrs <- attributes(x)
 
-    rslt <- paste("WHERE", attrs$tree$condition, sep = "\n") |>
-        .indent(by = 4)
+    rslt <- paste("WHERE", attrs$tree$condition, sep = "\n")
+	rslt <- .indent(rslt, by = 4)
 
     attributes(rslt) <- attrs
     return(rslt)

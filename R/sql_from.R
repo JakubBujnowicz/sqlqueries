@@ -15,8 +15,8 @@ sql_from <- function(table, alias = NULL)
 
     rslt <- .new_sql(class = "sql_from",
                      tree = list(table = table,
-                                 alias = alias)) |>
-        .sql_parse()
+                                 alias = alias)) 
+	rslt <- .sql_parse(rslt)
     return(rslt)
 }
 

@@ -35,8 +35,8 @@
         contains <- .sql_parse(contains, break_lines = n >= 2)
     }
 
-    rslt <- paste0("(", contains, ")", collapse = "") |>
-        .indent(by = 1)
+    rslt <- paste0("(", contains, ")", collapse = "")
+    rslt <- .indent(rslt, by = 1)
 
     attributes(rslt) <- attrs
     return(rslt)

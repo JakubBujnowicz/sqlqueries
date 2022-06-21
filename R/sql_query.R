@@ -17,8 +17,8 @@ sql_query <- function(..., .glue = NULL, .defuse = TRUE)
     names(ev_exprs) <- toupper(str_remove(nms, "^sql_"))
 
     rslt <- .new_sql(class = "sql_query",
-                     tree = ev_exprs) |>
-        .sql_parse()
+                     tree = ev_exprs)
+    rslt <- .sql_parse(rslt)
 
     if (!is.null(.glue)) {
         rslt <- sql_glue(rslt, .x = .glue)
