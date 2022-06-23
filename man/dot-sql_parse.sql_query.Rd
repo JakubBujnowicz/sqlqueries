@@ -4,7 +4,7 @@
 \alias{.sql_parse.sql_query}
 \title{Title}
 \usage{
-\method{.sql_parse}{sql_query}(x, ...)
+\method{.sql_parse}{sql_query}(x, glue, ...)
 }
 \arguments{
 \item{...}{}

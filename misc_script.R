@@ -5,6 +5,7 @@ load_all()
 (sel <- sql_select(stringr::words[1:3],
                    A = "asdasd",
                    glued = "{variable}",
+                   ("parenth"),
                    vars(Variable, SV = SecondVar)))
 
 
@@ -24,9 +25,25 @@ sql_from(sql(select("*"),
                  "a = 100"))
 
 
+# HAVING ------------------------------------------------------------------------
+(hv <- sql_having(("x = 10" %AND% "y = 11" %AND% "a = b") %OR%
+                     ("z = 12" %OR%
+                          "w = 13" %AND%
+                          "zw = 1213"),
+                 "a = 100"))
+
+
+# JOIN -------------------------------------------------------------------------
+(lj <- sql_join(table = "table2", type = "left",
+                alias = "b",
+                on = "a.KEY = b.KEY" %AND%
+                     "a.KEY2 = b.KEY2"))
+
+
 # QUERY ------------------------------------------------------------------------
 (qr <- sql_query(select(stringr::words[1:3]),
                  from("table", alias = "a"),
+                 lj,
                  wh,
                  "TEST"))
 sql(sel, fr, .glue = list(variable = "glued_var"))

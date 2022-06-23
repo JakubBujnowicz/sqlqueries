@@ -118,7 +118,7 @@
     str <- str_replace_all(str, "\n", paste0("\n", ind))
 
     if (indent_first) {
-        str <- paste0(str, ind)
+        str <- paste0(ind, str)
     }
 
     return(str)
