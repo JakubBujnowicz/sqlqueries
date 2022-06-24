@@ -27,18 +27,18 @@
 #'
 #' @param obj
 #' @param class
-#' @param tree
+#' @param fields
 #'
 #' @return
 #' @export
 #'
 #' @keywords internal
 #'
-.cast2sql <- function(obj, class, tree)
+.cast2sql <- function(obj, class, fields)
 {
     obj_name <- deparse(substitute(obj))
     class(obj) <- c(class, "sql", "character")
-    attr(obj, "tree") <- tree
+    attr(obj, "fields") <- fields
     assign(x = obj_name,
            value = obj,
            envir = parent.frame())
@@ -74,7 +74,7 @@
             call <- .rename_call(call, ".sql_parenth")
         }
 
-        # First defusing takes care of every call in the call tree,
+        # First defusing takes care of every call in the call fields,
         # so no need to do it again
         defusable <- rlang::is_call(call, name = .sql$defusables)
         if (defusable) {
@@ -178,17 +178,17 @@
 #' Title
 #'
 #' @param class
-#' @param tree
+#' @param fields
 #'
 #' @return
 #'
 #' @keywords internal
 #'
-.new_sql <- function(class, tree)
+.new_sql <- function(class, fields)
 {
     rslt <- structure("",
                       class = c(class, "sql", "character"),
-                      tree = tree)
+                      fields = fields)
     return(rslt)
 }
 

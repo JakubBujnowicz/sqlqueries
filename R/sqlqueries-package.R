@@ -14,7 +14,8 @@ NULL
 .sql <- within(list(),
                {
                    keywords <- c("query", "select", "from", "where",
-                                 "and", "or", "vars", "join", "having")
+                                 "and", "or", "vars", "join", "having",
+                                 "group_by", "order_by")
                    keyfuns <- paste0("sql_", keywords)
                    infix_funs <- paste0("%", c("OR", "AND"), "%")
                    allfuns <- c(keyfuns, infix_funs,

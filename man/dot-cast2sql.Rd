@@ -4,10 +4,10 @@
 \alias{.cast2sql}
 \title{Title}
 \usage{
-.cast2sql(obj, class, tree)
+.cast2sql(obj, class, fields)
 }
 \arguments{
-\item{tree}{}
+\item{fields}{}
 }
 \description{
 Title

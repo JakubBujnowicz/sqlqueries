@@ -48,7 +48,7 @@
     if (length(queries) > 0) {
         ev_exprs <- .replace_list(x = ev_exprs,
                                   what = lapply(ev_exprs[queries], attr,
-                                                which = "tree",
+                                                which = "fields",
                                                 exact = TRUE),
                                   where = queries)
     }

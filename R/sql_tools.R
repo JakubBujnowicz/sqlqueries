@@ -9,14 +9,14 @@ sql_tree <- function(x)
 
     .get_tree <- function(obj)
     {
-        tree <- attr(obj, "tree", exact = TRUE)
-        are_sqls <- sapply(tree, is_sql)
-        tree[are_sqls] <- lapply(tree[are_sqls], .get_tree)
-        return(tree)
+        fields <- attr(obj, "fields", exact = TRUE)
+        are_sqls <- sapply(fields, is_sql)
+        fields[are_sqls] <- lapply(fields[are_sqls], .get_tree)
+        return(fields)
     }
 
-    tree <- .get_tree(x)
-    return(tree)
+    fields <- .get_tree(x)
+    return(fields)
 }
 
 sql_vars <- function(...)

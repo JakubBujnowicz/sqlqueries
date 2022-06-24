@@ -17,7 +17,7 @@ sql_query <- function(..., .glue = NULL, .defuse = TRUE)
     names(ev_exprs) <- toupper(str_remove(nms, "^sql_"))
 
     rslt <- .new_sql(class = "sql_query",
-                     tree = ev_exprs)
+                     fields = ev_exprs)
     rslt <- .sql_parse(rslt)
 
     if (!is.null(.glue)) {
@@ -31,23 +31,3 @@ sql_query <- function(..., .glue = NULL, .defuse = TRUE)
 #' @rdname sql_query
 #'
 sql <- sql_query
-
-
-#' Title
-#'
-#' @param x
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-.sql_parse.sql_query <- function(x, glue, ...)
-{
-    attrs <- attributes(x)
-
-    rslt <- do.call(paste0, args = list(attrs$tree, collapse = "\n"))
-
-    attributes(rslt) <- attrs
-    return(rslt)
-}

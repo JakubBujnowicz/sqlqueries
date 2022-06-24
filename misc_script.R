@@ -45,6 +45,7 @@ sql_from(sql(select("*"),
                  from("table", alias = "a"),
                  lj,
                  wh,
+                 order_by(letters),
                  "TEST"))
 sql(sel, fr, .glue = list(variable = "glued_var"))
 sel + fr + wh

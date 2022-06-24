@@ -4,10 +4,10 @@
 \alias{.new_sql}
 \title{Title}
 \usage{
-.new_sql(class, tree)
+.new_sql(class, fields)
 }
 \arguments{
-\item{tree}{}
+\item{fields}{}
 }
 \description{
 Title
