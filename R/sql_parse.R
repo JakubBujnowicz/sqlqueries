@@ -205,7 +205,29 @@
 #' @rdname sql_parse
 #' @keywords internal
 #'
-NULL
+.parse.sql_tuple <- function(x, fields, ...)
+{
+    rslt <- fields$vectors
+    rslt <- lapply(rslt,
+                   function(e)
+                   {
+                       if (!is.numeric(e)) {
+                           e <- paste0("'", e, "'")
+                       }
+
+                       return(e)
+                   })
+
+    if (length(rslt) > 1) {
+        rslt <- do.call(paste, args = c(rslt, list(sep = ", ")))
+        rslt <- paste0("(", rslt, ")")
+    } else {
+        rslt <- unlist(rslt)
+    }
+
+    rslt <- paste0("(", toString(rslt), ")")
+    return(rslt)
+}
 
 
 # WHERE ------------------------------------------------------------------------
