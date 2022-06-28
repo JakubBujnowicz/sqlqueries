@@ -22,6 +22,26 @@
 }
 
 
+#' Title
+#'
+#' @param strings
+#'
+#' @return
+#'
+#' @keywords internal
+#'
+.add_spaces <- function(strings)
+{
+    splt <- strsplit(strings, split = "\n")
+    chars <- lapply(splt, nchar)
+    mx <- max(unlist(chars))
+    last <- sapply(chars, tail, 1L)
+    fill <- mx - last
+    spaces <- strrep(" ", fill)
+    rslt <- paste0(strings, spaces)
+    return(rslt)
+}
+
 
 #' Title
 #'

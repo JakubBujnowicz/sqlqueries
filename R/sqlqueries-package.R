@@ -10,6 +10,7 @@
 ## usethis namespace: end
 NULL
 
+
 # Internal package variables ---------------------------------------------------
 .sql <- within(list(),
                {

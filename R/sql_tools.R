@@ -22,23 +22,16 @@ sql_tree <- function(x)
 sql_vars <- function(...)
 {
     exprs <- enexprs(...)
-    symbs <- sapply(exprs, rlang::is_symbol)
     minus_calls <- sapply(exprs, rlang::is_call, name = "-")
 
-    pick <- symbs | minus_calls
-    depexpr <- sapply(exprs, deparse)
-    if (!all(pick)) {
-        warning("the following expressions omitted:\n",
-                depexpr[!pick])
-    }
+    rslt <- sapply(exprs, deparse)
 
     if (sum(minus_calls) > 0L) {
         exprs[minus_calls] <- lapply(exprs[minus_calls],
                                      function(x) x[[2]])
-        depexpr[minus_calls] <- paste0(sapply(exprs[minus_calls], deparse),
-                                       " DESC")
+        rslt[minus_calls] <- paste0(sapply(exprs[minus_calls], deparse),
+                                    " DESC")
     }
 
-    rslt <- depexpr[pick]
     return(rslt)
 }

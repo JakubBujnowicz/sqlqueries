@@ -6,8 +6,9 @@
 #' @export
 #'
 #' @examples
-sql_query <- function(..., .glue = NULL, .defuse = TRUE)
+sql_query <- function(..., glue = NULL, .defuse = TRUE)
 {
+    # Assertions
     assert_flag(.defuse)
 
     ev_exprs <- .sql_prepare(..., defuse = .defuse)
@@ -21,7 +22,7 @@ sql_query <- function(..., .glue = NULL, .defuse = TRUE)
     rslt <- .sql_parse(rslt)
 
     if (!is.null(.glue)) {
-        rslt <- sql_glue(rslt, .x = .glue)
+        rslt <- sql_glue(rslt, .x = glue)
     }
 
     return(rslt)

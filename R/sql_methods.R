@@ -9,7 +9,12 @@
 #' @examples
 print.sql <- function(x, ...)
 {
-    cat(x, "\n")
+    k <- max(nchar(strsplit(x, "\n")[[1]]))
+    cat(paste0("/* [sqlqueries] */",
+               "\n", strrep("-", k),
+               "\n", x,
+               "\n", strrep("-", k),
+               "\n"))
 }
 
 #' Title

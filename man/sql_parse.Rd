@@ -3,6 +3,7 @@
 \name{sql_parse}
 \alias{sql_parse}
 \alias{.parse}
+\alias{.parse.sql_case}
 \alias{.parse.sql_from}
 \alias{.parse.sql_group_by}
 \alias{.parse.sql_having}
@@ -12,10 +13,13 @@
 \alias{.parse.sql_parenth}
 \alias{.parse.sql_query}
 \alias{.parse.sql_select}
+\alias{.parse.sql_tuple}
 \alias{.parse.sql_where}
 \title{Title}
 \usage{
 .parse(x, fields, ...)
+
+\method{.parse}{sql_case}(x, fields, ...)
 
 \method{.parse}{sql_from}(x, fields, ...)
 
@@ -34,6 +38,8 @@
 \method{.parse}{sql_query}(x, fields, ...)
 
 \method{.parse}{sql_select}(x, fields, ...)
+
+\method{.parse}{sql_tuple}(x, fields, ...)
 
 \method{.parse}{sql_where}(x, fields, ...)
 }

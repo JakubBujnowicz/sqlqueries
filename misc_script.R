@@ -40,6 +40,11 @@ sql_from(sql(select("*"),
                      "a.KEY2 = b.KEY2"))
 
 
+# CASE -------------------------------------------------------------------------
+(cs <- sql_case("SPACE IS 10", 1,
+                "c", 2,
+                .else = 100))
+
 # QUERY ------------------------------------------------------------------------
 (qr <- sql_query(select(stringr::words[1:3]),
                  from("table", alias = "a"),
@@ -53,4 +58,3 @@ sel + fr + wh
 sql_from(qr)
 sql_query(qr)
 sql(from(qr))
-

@@ -25,9 +25,9 @@
 
 .columns_parser <- function(cols)
 {
-    rslt <- format(cols)
+    rslt <- .add_spaces(cols)
     add_as <- names(cols) != cols & names(cols) != ""
-    rslt[add_as] <- paste0(rslt[add_as], " AS ", names(rslt[add_as]))
+    rslt[add_as] <- paste0(rslt[add_as], " AS ", names(cols[add_as]))
     rslt <- paste0(trimws(rslt, which = "right"), collapse = ",\n")
     return(rslt)
 }
