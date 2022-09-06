@@ -12,9 +12,4 @@ sql_or <- function(x, y)
 #' @rdname sql_logical
 #' @export
 #'
-`%OR%` <- function(x, y)
-{
-    rslt <- .new_logical(x = x, y = y,
-                         operator = "or")
-    return(rslt)
-}
+`%OR%` <- sql_or

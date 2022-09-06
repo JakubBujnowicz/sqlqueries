@@ -1,5 +1,20 @@
+#' Title
+#'
+#' @param x
+#' @param y
+#' @param operator
+#'
+#' @name sql_logical
+#'
+#' @return
+#' @export
+#'
+#' @examples
 .new_logical <- function(x, y, operator)
 {
+    assert_string(x, min.chars = 1L)
+    assert_string(y, min.chars = 1L)
+
     xtree <- attr(x, "fields", exact = TRUE)
     ytree <- attr(y, "fields", exact = TRUE)
 

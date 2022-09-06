@@ -7,6 +7,7 @@
 \alias{.parse.sql_from}
 \alias{.parse.sql_group_by}
 \alias{.parse.sql_having}
+\alias{.parse.sql_in}
 \alias{.parse.sql_join}
 \alias{.parse.sql_logical}
 \alias{.parse.sql_order_by}
@@ -26,6 +27,8 @@
 \method{.parse}{sql_group_by}(x, fields, ...)
 
 \method{.parse}{sql_having}(x, fields, ...)
+
+\method{.parse}{sql_in}(x, fields, ...)
 
 \method{.parse}{sql_join}(x, fields, ...)
 

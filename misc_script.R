@@ -1,11 +1,18 @@
 load_all()
 
 
+# CASE -------------------------------------------------------------------------
+(cs <- sql_case("SPACE IS 10", 1,
+                "c", 2,
+                .else = 100))
+
+
 # SELECT -----------------------------------------------------------------------
 (sel <- sql_select(stringr::words[1:3],
                    A = "asdasd",
                    glued = "{variable}",
                    ("parenth"),
+                   Case = cs,
                    vars(Variable, SV = SecondVar)))
 
 
@@ -30,7 +37,7 @@ sql_from(sql(select("*"),
                      ("z = 12" %OR%
                           "w = 13" %AND%
                           "zw = 1213"),
-                 "a = 100"))
+                 "a" %IN% 1:5))
 
 
 # JOIN -------------------------------------------------------------------------
@@ -39,22 +46,25 @@ sql_from(sql(select("*"),
                 on = "a.KEY = b.KEY" %AND%
                      "a.KEY2 = b.KEY2"))
 
+# ORDER BY ---------------------------------------------------------------------
+(ob <- sql_order_by(stringr::words[1:3]))
 
-# CASE -------------------------------------------------------------------------
-(cs <- sql_case("SPACE IS 10", 1,
-                "c", 2,
-                .else = 100))
+
+# GROUP BY ---------------------------------------------------------------------
+(gb <- sql_group_by(stringr::words[4:6]))
+
 
 # QUERY ------------------------------------------------------------------------
 (qr <- sql_query(select(stringr::words[1:3]),
                  from("table", alias = "a"),
                  lj,
                  wh,
-                 order_by(letters),
+                 ob,
+                 gb,
                  "TEST"))
 sql(sel, fr, .glue = list(variable = "glued_var"))
 sel + fr + wh
 
 sql_from(qr)
 sql_query(qr)
-sql(from(qr))
+sql(from(qr, alias = "A"))

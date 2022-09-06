@@ -107,6 +107,22 @@
 }
 
 
+# IN ---------------------------------------------------------------------------
+#' @rdname sql_parse
+#' @keywords internal
+#'
+.parse.sql_in <- function(x, fields, ...)
+{
+    vec <- unique(fields$vector)
+    if (length(vec) > 1) {
+        vec <- sql_tuple(vec)
+    }
+
+    rslt <- paste(fields$x, "IN", vec)
+    return(rslt)
+}
+
+
 # JOIN -------------------------------------------------------------------------
 #' @rdname sql_parse
 #' @keywords internal

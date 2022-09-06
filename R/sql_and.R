@@ -11,9 +11,4 @@ sql_and <- function(x, y)
 #' @rdname sql_logical
 #' @export
 #'
-`%AND%` <- function(x, y)
-{
-    rslt <- .new_logical(x = x, y = y,
-                         operator = "and")
-    return(rslt)
-}
+`%AND%` <- sql_and
