@@ -123,6 +123,39 @@
 }
 
 
+# INSERT -----------------------------------------------------------------------
+#' @rdname sql_parse
+#' @keywords internal
+#'
+.parse.sql_insert <- function(x, fields, ...)
+{
+    vals <- as.list(fields$values)
+    cols <- fields$columns
+
+    if (!is.null(cols)) {
+        vals <- vals[cols]
+        cols <- paste0("(", toString(cols), ")")
+    } else {
+        cols <- ""
+    }
+
+    target <- paste0("INSERT INTO\n", fields$into, " ", cols)
+
+    if (!is.null(fields$query)) {
+        what <- fields$query
+    } else {
+        vals <- do.call(sql_tuple, args = vals)
+        vals <- .sql_parse(vals, as_values = TRUE)
+        what <- paste0("VALUES\n", .indent(vals, by = 4, indent_first = TRUE))
+    }
+
+    rslt <- paste0(.indent(target, by = 4), "\n", what)
+    return(rslt)
+}
+
+
+
+
 # JOIN -------------------------------------------------------------------------
 #' @rdname sql_parse
 #' @keywords internal
@@ -231,7 +264,14 @@
 #'
 .parse.sql_select <- function(x, fields, ...)
 {
-    header <- ifelse(fields$distinct, "SELECT DISTINCT", "SELECT")
+    header <- "SELECT"
+    if (fields$distinct) {
+        header <- paste(header, "DISTINCT")
+    }
+    if (!is.null(fields$top_n)) {
+        header <- paste0(header, " TOP ", fields$top_n)
+    }
+
     rslt <- paste(header, .columns_parser(fields$columns), sep = "\n")
     rslt <- .indent(rslt, by = 4)
     return(rslt)
@@ -242,7 +282,7 @@
 #' @rdname sql_parse
 #' @keywords internal
 #'
-.parse.sql_tuple <- function(x, fields, ...)
+.parse.sql_tuple <- function(x, fields, as_values = FALSE, ...)
 {
     rslt <- fields$vectors
     rslt <- lapply(rslt,
@@ -255,14 +295,21 @@
                        return(e)
                    })
 
-    if (length(rslt) > 1) {
+    if (length(rslt) > 1 || as_values) {
+        rslt <- lapply(rslt, .align, short = !as_values)
         rslt <- do.call(paste, args = c(rslt, list(sep = ", ")))
         rslt <- paste0("(", rslt, ")")
     } else {
         rslt <- unlist(rslt)
+        rslt <- .align(rslt, short = TRUE)
     }
 
-    rslt <- paste0("(", toString(rslt), ")")
+    if (as_values) {
+        rslt <- paste0(rslt, collapse = ",\n")
+    } else {
+        rslt <- paste0("(", toString(rslt), ")")
+    }
+
     return(rslt)
 }
 

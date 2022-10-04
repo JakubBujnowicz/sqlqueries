@@ -15,12 +15,14 @@ NULL
 .sql <- within(list(),
                {
                    keywords <- c("query", "select", "from", "where",
-                                 "and", "or", "vars", "join", "having",
-                                 "group_by", "order_by", "tuple")
+                                 "and", "or", "in", "vars", "join", "having",
+                                 "group_by", "order_by", "tuple", "insert")
                    keyfuns <- paste0("sql_", keywords)
-                   infix_funs <- paste0("%", c("OR", "AND"), "%")
+                   infix_funs <- paste0("%", c("OR", "AND", "IN"), "%")
                    allfuns <- c(keyfuns, infix_funs,
                                 ".sql_parenth")
 
-                   defusables <- paste0("sql_", c("query", "select", "where"))
+                   defusables <- paste0("sql_",
+                                        c("query", "select", "where",
+                                          "having", "order_by", "group_by"))
                })

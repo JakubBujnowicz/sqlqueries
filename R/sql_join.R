@@ -10,9 +10,9 @@ sql_join <- function(table, on, type = "inner", alias = NULL)
 
     rslt <- .new_sql(class = "sql_join",
                      fields = list(table = table,
-                                 type = type,
-                                 alias = alias,
-                                 condition = on))
+                                   type = type,
+                                   alias = alias,
+                                   condition = on))
     rslt <- .sql_parse(rslt)
     return(rslt)
 }

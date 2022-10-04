@@ -42,6 +42,35 @@
     return(rslt)
 }
 
+#' Title
+#'
+#' @param x
+#' @param short
+#'
+#' @return
+#'
+#' @keywords internal
+#'
+.align <- function(x, short = FALSE)
+{
+    nas <- is.na(x)
+    rslt <- format(x, digits = abs(floor(log10(.Machine$double.eps)) + 1),
+                   scientific = FALSE,
+                   trim = short,
+                   drop0trailing = short)
+
+    if (any(nas)) {
+        rslt[nas] <- "NULL"
+
+        if (!short) {
+            just <- ifelse(is.numeric(x), "right", "left")
+            rslt <- format(rslt, justify = just)
+        }
+    }
+
+    return(rslt)
+}
+
 
 #' Title
 #'

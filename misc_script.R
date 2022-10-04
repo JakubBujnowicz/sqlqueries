@@ -13,7 +13,9 @@ load_all()
                    glued = "{variable}",
                    ("parenth"),
                    Case = cs,
-                   vars(Variable, SV = SecondVar)))
+                   vars(Variable, SV = SecondVar),
+                   .distinct = TRUE,
+                   .top_n = 10))
 
 
 # FROM -------------------------------------------------------------------------
@@ -52,6 +54,19 @@ sql_from(sql(select("*"),
 
 # GROUP BY ---------------------------------------------------------------------
 (gb <- sql_group_by(stringr::words[4:6]))
+
+
+# INSERT -----------------------------------------------------------------------
+dt <- iris[sample(seq_len(nrow(iris)), 10), ]
+dt[1:2, 1] <- c(pi + 10, NA)
+dt$Sepal.Width <- rbinom(10, 10, runif(10))
+(ins <- sql_insert(into = "tab",
+                   values = dt,
+                   columns = sample(names(dt), 3)))
+
+
+(ins2 <- sql_insert(into = "tab",
+                    query = sel + fr + wh))
 
 
 # QUERY ------------------------------------------------------------------------
