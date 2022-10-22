@@ -69,6 +69,15 @@ dt$Sepal.Width <- rbinom(10, 10, runif(10))
                     query = sel + fr + wh))
 
 
+# UPDATE -----------------------------------------------------------------------
+(upd <- sql_update(table = "tab",
+                   set = list(Date = Sys.Date(),
+                              TimeDate = Sys.time(),
+                              Number = 1,
+                              Pi = pi,
+                              Name = "Qwerty")))
+sql(upd, wh)
+
 # QUERY ------------------------------------------------------------------------
 (qr <- sql_query(select(stringr::words[1:3]),
                  from("table", alias = "a"),
