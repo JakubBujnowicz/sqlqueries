@@ -8,6 +8,7 @@
 \alias{.parse.sql_group_by}
 \alias{.parse.sql_having}
 \alias{.parse.sql_in}
+\alias{.parse.sql_insert}
 \alias{.parse.sql_join}
 \alias{.parse.sql_logical}
 \alias{.parse.sql_order_by}
@@ -15,6 +16,7 @@
 \alias{.parse.sql_query}
 \alias{.parse.sql_select}
 \alias{.parse.sql_tuple}
+\alias{.parse.sql_update}
 \alias{.parse.sql_where}
 \title{Title}
 \usage{
@@ -30,6 +32,8 @@
 
 \method{.parse}{sql_in}(x, fields, ...)
 
+\method{.parse}{sql_insert}(x, fields, ...)
+
 \method{.parse}{sql_join}(x, fields, ...)
 
 \method{.parse}{sql_logical}(x, fields, break_lines = TRUE, ...)
@@ -42,7 +46,9 @@
 
 \method{.parse}{sql_select}(x, fields, ...)
 
-\method{.parse}{sql_tuple}(x, fields, ...)
+\method{.parse}{sql_tuple}(x, fields, as_values = FALSE, ...)
+
+\method{.parse}{sql_update}(x, fields, ...)
 
 \method{.parse}{sql_where}(x, fields, ...)
 }

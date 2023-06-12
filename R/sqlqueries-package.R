@@ -7,6 +7,7 @@
 #' @importFrom glue glue_data
 #' @importFrom stringr str_remove
 #' @importFrom stringr str_replace_all
+#' @importFrom utils tail
 ## usethis namespace: end
 NULL
 

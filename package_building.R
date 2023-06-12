@@ -10,27 +10,27 @@
 
 
 # Libraries --------------------------------------------------------------------
-tic("#1: Documenting")
+tictoc::tic("#1: Documenting")
 document()
 # roxygenise(clean = TRUE)
-toc()
+tictoc::toc()
 
-tic("#2: Checking")
+tictoc::tic("#2: Checking")
 check(document = FALSE, cran = TRUE)
-toc()
+tictoc::toc()
 
-tic("#3: Building")
+tictoc::tic("#3: Building")
 build(path = "tars")
 # build_manual(path = "manuals")
-toc()
+tictoc::toc()
 
-tic("#4: Installing")
+tictoc::tic("#4: Installing")
 install()
-toc()
+tictoc::toc()
 
-tic("Updating data")
+tictoc::tic("Updating data")
 source("data-raw/data_updating.R")
-toc()
+tictoc::toc()
 
 
 # Release ######################################################################
@@ -39,7 +39,7 @@ check_rhub()
 check_win_devel()
 
 {
-    tic("#5: Release")
+    tictoc::tic("#5: Release")
     release()
-    toc()
+    tictoc::toc()
 }
