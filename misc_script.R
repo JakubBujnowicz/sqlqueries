@@ -92,6 +92,14 @@ sql(upd, wh)
                    where = wh))
 
 
+# CREATE TABLE -----------------------------------------------------------------
+(cr_tab <- sql_create_table(name = "tab",
+                            variables = c(COL1 = "INT",
+                                          COL2 = "varchar(255)")))
+(cr_tab <- sql_create_table(name = "tab",
+                            query = sel + fr + wh))
+
+
 # QUERY ------------------------------------------------------------------------
 (qr <- sql_query(select(stringr::words[1:3]),
                  from("table", alias = "a"),
