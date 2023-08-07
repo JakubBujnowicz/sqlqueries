@@ -57,6 +57,33 @@
 }
 
 
+# DELETE -----------------------------------------------------------------------
+#' @rdname sql_parse
+#' @keywords internal
+#'
+.parse.sql_delete <- function(x, fields, ...)
+{
+    wh_cond <- attr(fields$where, "fields")$condition
+    dots_cond <- fields$condition
+    cond <- list(wh_cond, dots_cond)
+
+    # Remove empty
+    cond <- cond[!sapply(cond, is.null)]
+    if (length(cond) > 0) {
+        cond <- do.call(sql_condition, args = cond)
+    }
+
+    rslt <- paste("DELETE FROM", fields$from)
+    if (length(cond) > 0) {
+        cond <- paste("WHERE", cond, sep = "\n")
+        cond <- .indent(cond, by = 4)
+
+        rslt <- paste0(rslt, "\n", cond)
+    }
+    return(rslt)
+}
+
+
 # FROM -------------------------------------------------------------------------
 #' @rdname sql_parse
 #' @keywords internal

@@ -62,7 +62,7 @@ dt[1:2, 1] <- c(pi + 10, NA)
 dt$Sepal.Width <- rbinom(10, 10, runif(10))
 (ins <- sql_insert(into = "tab",
                    values = dt,
-                   columns = sample(names(dt), 3)))
+                   columns = sample(names(dt), 5)))
 
 
 (ins2 <- sql_insert(into = "tab",
@@ -77,6 +77,20 @@ dt$Sepal.Width <- rbinom(10, 10, runif(10))
                               Pi = pi,
                               Name = "Qwerty")))
 sql(upd, wh)
+
+
+# DELETE -----------------------------------------------------------------------
+(del <- sql_delete(from = "tab"))
+(del <- sql_delete(from = "tab",
+                   where = wh))
+(del <- sql_delete(from = "tab",
+                   "COL1 = 'a'",
+                   "COL2 > 1"))
+(del <- sql_delete(from = "tab",
+                   "COL1 = 'a'",
+                   "COL2 > 1",
+                   where = wh))
+
 
 # QUERY ------------------------------------------------------------------------
 (qr <- sql_query(select(stringr::words[1:3]),

@@ -17,7 +17,8 @@ NULL
                {
                    keywords <- c("query", "select", "from", "where",
                                  "and", "or", "in", "vars", "join", "having",
-                                 "group_by", "order_by", "tuple", "insert")
+                                 "group_by", "order_by", "tuple", "insert",
+                                 "update", "delete")
                    keyfuns <- paste0("sql_", keywords)
                    infix_funs <- paste0("%", c("OR", "AND", "IN"), "%")
                    allfuns <- c(keyfuns, infix_funs,
@@ -25,5 +26,6 @@ NULL
 
                    defusables <- paste0("sql_",
                                         c("query", "select", "where",
-                                          "having", "order_by", "group_by"))
+                                          "having", "order_by", "group_by",
+                                          "delete"))
                })
