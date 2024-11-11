@@ -4,6 +4,8 @@
 \alias{sql_parse}
 \alias{.parse}
 \alias{.parse.sql_case}
+\alias{.parse.sql_create_table}
+\alias{.parse.sql_delete}
 \alias{.parse.sql_from}
 \alias{.parse.sql_group_by}
 \alias{.parse.sql_having}
@@ -23,6 +25,10 @@
 .parse(x, fields, ...)
 
 \method{.parse}{sql_case}(x, fields, ...)
+
+\method{.parse}{sql_create_table}(x, fields, ...)
+
+\method{.parse}{sql_delete}(x, fields, ...)
 
 \method{.parse}{sql_from}(x, fields, ...)
 

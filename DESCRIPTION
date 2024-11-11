@@ -2,20 +2,24 @@ Package: sqlqueries
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "Jakub", 
-           family = "Bujnowicz", 
-           email = "bujnowiczgithub@gmail.com", 
-           role = c("aut", "cre"))
+    person("Jakub", "Bujnowicz", , "bujnowiczgithub@gmail.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
 License: GPL-3 + file LICENSE
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+Depends: 
+    R (>= 2.10)
 Imports: 
     checkmate,
     glue,
     rlang,
     stringr,
     utils
-Depends: 
-    R (>= 2.10)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+Suggests: 
+    data.table,
+    spelling,
+    sqldf,
+    testthat (>= 3.0.0)
+Language: en-US
+Config/testthat/edition: 3

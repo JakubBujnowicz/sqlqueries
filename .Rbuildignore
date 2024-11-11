@@ -3,3 +3,5 @@
 ^LICENSE\.md$
 ^misc_script.R$
 ^package_building.R$
+^README\.Rmd$
+^codecov\.yml$
