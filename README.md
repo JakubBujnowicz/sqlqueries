@@ -7,6 +7,7 @@
 
 [![Codecov test
 coverage](https://codecov.io/gh/JakubBujnowicz/sqlqueries/graph/badge.svg)](https://app.codecov.io/gh/JakubBujnowicz/sqlqueries)
+[![R-CMD-check](https://github.com/JakubBujnowicz/sqlqueries/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JakubBujnowicz/sqlqueries/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of sqlqueries is to …

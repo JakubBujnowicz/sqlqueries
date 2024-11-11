@@ -5,3 +5,4 @@
 ^package_building.R$
 ^README\.Rmd$
 ^codecov\.yml$
+^\.github$
