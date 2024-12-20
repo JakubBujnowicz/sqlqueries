@@ -12,3 +12,38 @@ sql_tuple <- function(...)
     rslt <- .sql_parse(rslt)
     return(rslt)
 }
+
+
+#' @rdname sql_parse
+#' @keywords internal
+#'
+.parse.sql_tuple <- function(x, fields, as_values = FALSE, ...)
+{
+    rslt <- fields$vectors
+    rslt <- lapply(rslt,
+                   function(e)
+                   {
+                       if (!is.numeric(e)) {
+                           e <- paste0("'", e, "'")
+                       }
+
+                       return(e)
+                   })
+
+    if (length(rslt) > 1 || as_values) {
+        rslt <- lapply(rslt, .align, short = !as_values)
+        rslt <- do.call(paste, args = c(rslt, list(sep = ", ")))
+        rslt <- paste0("(", rslt, ")")
+    } else {
+        rslt <- unlist(rslt)
+        rslt <- .align(rslt, short = TRUE)
+    }
+
+    if (as_values) {
+        rslt <- paste0(rslt, collapse = ",\n")
+    } else {
+        rslt <- paste0("(", toString(rslt), ")")
+    }
+
+    return(rslt)
+}

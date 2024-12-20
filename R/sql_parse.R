@@ -35,27 +35,6 @@
     UseMethod(".parse")
 }
 
-# CASE -------------------------------------------------------------------------
-#' @rdname sql_parse
-#' @keywords internal
-#'
-.parse.sql_case <- function(x, fields, ...)
-{
-    x <- fields$cases
-    n <- length(x)
-    thens <- seq_len(n / 2L) * 2L
-    whens <- thens - 1L
-
-    rslt <- paste0("\nWHEN ", format(x[whens]), " THEN ", x[thens])
-    rslt <- paste0(rslt, collapse = "")
-    if (!is.null(fields$.else)) {
-        rslt <- paste0(rslt, "\nELSE ", fields$.else)
-    }
-
-    rslt <- paste0("CASE", .indent(rslt, by = 4L), "\nEND")
-    return(rslt)
-}
-
 
 # CREATE TABLE -----------------------------------------------------------------
 #' @rdname sql_parse
@@ -330,40 +309,6 @@
 
 
 # Tuple ------------------------------------------------------------------------
-#' @rdname sql_parse
-#' @keywords internal
-#'
-.parse.sql_tuple <- function(x, fields, as_values = FALSE, ...)
-{
-    rslt <- fields$vectors
-    rslt <- lapply(rslt,
-                   function(e)
-                   {
-                       if (!is.numeric(e)) {
-                           e <- paste0("'", e, "'")
-                       }
-
-                       return(e)
-                   })
-
-    if (length(rslt) > 1 || as_values) {
-        rslt <- lapply(rslt, .align, short = !as_values)
-        rslt <- do.call(paste, args = c(rslt, list(sep = ", ")))
-        rslt <- paste0("(", rslt, ")")
-    } else {
-        rslt <- unlist(rslt)
-        rslt <- .align(rslt, short = TRUE)
-    }
-
-    if (as_values) {
-        rslt <- paste0(rslt, collapse = ",\n")
-    } else {
-        rslt <- paste0("(", toString(rslt), ")")
-    }
-
-    return(rslt)
-}
-
 
 # UPDATE -----------------------------------------------------------------------
 #' @rdname sql_parse
