@@ -17,3 +17,12 @@ sql_having <- function(..., .defuse = TRUE)
     rslt <- .sql_parse(rslt)
     return(rslt)
 }
+
+
+
+.parse.sql_having <- function(x, fields, ...)
+{
+    rslt <- paste("HAVING", fields$condition, sep = "\n")
+    rslt <- .indent(rslt, by = 4)
+    return(rslt)
+}

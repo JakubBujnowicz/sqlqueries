@@ -12,3 +12,23 @@ sql_case <- function(..., .else = NULL)
     rslt <- .sql_parse(rslt)
     return(rslt)
 }
+
+#' @keywords internal
+.parse.sql_case <- function(x, fields, ...)
+{
+    x <- fields$cases
+    n <- length(x)
+    thens <- seq_len(n / 2L) * 2L
+    whens <- thens - 1L
+
+    rslt <- paste0("\nWHEN ", format(x[whens]), " THEN ", x[thens])
+    rslt <- paste0(rslt, collapse = "")
+    if (!is.null(fields$.else)) {
+        rslt <- paste0(rslt, "\nELSE ", fields$.else)
+    }
+
+    rslt <- paste0("CASE", .indent(rslt, by = 4L), "\nEND")
+    return(rslt)
+}
+
+

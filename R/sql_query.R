@@ -32,3 +32,11 @@ sql_query <- function(..., .glue = NULL, .defuse = TRUE)
 #' @rdname sql_query
 #'
 sql <- sql_query
+
+
+
+.parse.sql_query <- function(x, fields, ...)
+{
+    rslt <- do.call(paste0, args = list(fields, collapse = "\n"))
+    return(rslt)
+}

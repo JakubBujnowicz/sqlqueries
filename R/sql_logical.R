@@ -37,3 +37,27 @@
     rslt <- .sql_parse(rslt)
     return(rslt)
 }
+
+
+
+.parse.sql_logical <- function(x, fields, break_lines = TRUE, ...)
+{
+    n <- length(fields$operators)
+
+    sep <- ifelse(break_lines, "\n", " ")
+    sep <- paste0(sep, toupper(fields$operators), " ")
+
+    rslt <- fields$elements[[1]]
+    for (i in seq_len(n)) {
+        curr <- fields$elements[[i + 1]]
+        if (inherits(curr, "sql_parenth")) {
+
+            # Indent by the width of the operator
+            curr <- .indent(curr, by = nchar(sep[i]) - 1)
+        }
+
+        rslt <- paste0(rslt, sep[i], curr)
+    }
+
+    return(rslt)
+}

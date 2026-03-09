@@ -10,27 +10,25 @@
 
 
 # Libraries --------------------------------------------------------------------
-tictoc::tic("#1: Documenting")
-document()
-# roxygenise(clean = TRUE)
-tictoc::toc()
+# 1: Documenting
+devtools::document()
+# roxygen2::roxygenise(clean = TRUE)
 
-tictoc::tic("#2: Checking")
-check(document = FALSE, cran = TRUE)
-tictoc::toc()
+# 2: Checking
+devtools::check(document = FALSE, cran = TRUE)
 
-tictoc::tic("#3: Building")
-build(path = "tars")
-# build_manual(path = "manuals")
-tictoc::toc()
+# 3: Testing
+devtools::test()
 
-tictoc::tic("#4: Installing")
-install()
-tictoc::toc()
+# 4: Building
+devtools::build(path = "tars")
+# devtools::build_manual(path = "manuals")
 
-tictoc::tic("Updating data")
+# 5: Installing
+devtools::install()
+
+# Updating data
 source("data-raw/data_updating.R")
-tictoc::toc()
 
 
 # Release ######################################################################
@@ -38,8 +36,6 @@ spell_check()
 check_rhub()
 check_win_devel()
 
-{
-    tictoc::tic("#5: Release")
-    release()
-    tictoc::toc()
-}
+# 5: Release
+release()
+

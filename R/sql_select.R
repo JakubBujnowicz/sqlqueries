@@ -13,3 +13,20 @@ sql_select <- function(..., .distinct = FALSE, .top_n = NULL, .defuse = TRUE)
     rslt <- .sql_parse(rslt)
     return(rslt)
 }
+
+
+
+.parse.sql_select <- function(x, fields, ...)
+{
+    header <- "SELECT"
+    if (fields$distinct) {
+        header <- paste(header, "DISTINCT")
+    }
+    if (!is.null(fields$top_n)) {
+        header <- paste0(header, " TOP ", fields$top_n)
+    }
+
+    rslt <- paste(header, .columns_parser(fields$columns), sep = "\n")
+    rslt <- .indent(rslt, by = 4)
+    return(rslt)
+}

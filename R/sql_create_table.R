@@ -19,3 +19,24 @@ sql_create_table <- function(name, variables = NULL, query = NULL)
     rslt <- .sql_parse(rslt)
     return(rslt)
 }
+
+
+
+.parse.sql_create_table <- function(x, fields, ...)
+{
+    query <- fields$query
+    vars <- fields$variables
+
+    rslt <- paste("CREATE TABLE", fields$name)
+    if (!is.null(query)) {
+        rslt <- paste0(rslt, " AS \n",
+                       .indent(query, by = 4L, indent_first = TRUE))
+    } else {
+        vars <- paste(format(names(vars)),
+                      toupper(vars),
+                      collapse = ",\n")
+        vars <- .indent(vars, by = 4L, indent_first = TRUE)
+        rslt <- paste0(rslt, " (\n", vars, "\n)")
+    }
+    return(rslt)
+}

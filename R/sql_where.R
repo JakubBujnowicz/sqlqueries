@@ -17,3 +17,12 @@ sql_where <- function(..., .defuse = TRUE)
     rslt <- .sql_parse(rslt)
     return(rslt)
 }
+
+
+
+.parse.sql_where <- function(x, fields, ...)
+{
+    rslt <- paste("WHERE", fields$condition, sep = "\n")
+    rslt <- .indent(rslt, by = 4)
+    return(rslt)
+}
