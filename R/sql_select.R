@@ -1,14 +1,16 @@
-#' Construct an SQL SELECT statement
+#' Construct a SQL SELECT statement
+#'
+#' DESCRIPTION TO BE WRITTEN
 #'
 #' @param ... Columns to select. Can be unquoted column names, character strings,
-#'   or results of other sql queries (e.g. [sql_case()]).
+#'   or results of other `sql` objects (e.g. [sqlqueries::sql_case()]).
 #' @param .distinct a logical value. If `TRUE`, adds "DISTINCT" to the query.
 #' @param .top a single number. If provided, adds a "TOP" clause.
 #' @param .top_percent a logical value. If `TRUE`, adds "PERCENT" to the "TOP"
 #'   clause.
 #' @param .top_with_ties a logical value. If `TRUE`, adds "WITH TIES" to the
 #'   "TOP" clause.
-#' @param .defuse Logical. Whether to defuse the input arguments.
+#' @param .defuse a logical value. Whether to defuse the input arguments in `...`.
 #'
 #' @return A character string representing the SQL SELECT statement, with S3
 #'   class 'sql_select'.
@@ -39,11 +41,7 @@ sql_select <- function(..., .distinct = FALSE,
 
 #' Internal parser for `sql_select` objects
 #'
-#' @param x A sql_select object.
-#' @param fields Fields of the sql_select object.
-#' @param ... additional arguments.
-#'
-#' @return A character string with parsed string.
+#' @inheritParams sql_parse
 #' @keywords internal
 #'
 .parse.sql_select <- function(x, fields, ...)

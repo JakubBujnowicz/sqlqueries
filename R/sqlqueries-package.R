@@ -29,3 +29,8 @@ NULL
                           "having", "order_by", "group_by",
                           "delete"))
 })
+
+
+# So that data.table works in testthat
+.datatable.aware <- TRUE
+

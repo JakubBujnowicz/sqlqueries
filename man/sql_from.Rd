@@ -2,13 +2,23 @@
 % Please edit documentation in R/sql_from.R
 \name{sql_from}
 \alias{sql_from}
-\title{Title}
+\title{Construct a SQL FROM statement}
 \usage{
 sql_from(table, alias = NULL)
 }
 \arguments{
-\item{alias}{}
+\item{table}{a single string with the name of the table. In particular, a
+\code{sql_query} object may be passed as well, it is then automatically
+wrapped in parentheses.}
+
+\item{alias}{a single string or \code{NULL}. If provided, serves as an alias for
+the table. Alias can also be provided by passing a named vector to
+\code{table} (the name cannot be empty), however \code{alias} takes precedence.}
+}
+\value{
+A character string representing the SQL FROM statement, with S3
+class 'sql_from'.
 }
 \description{
-Title
+Construct a SQL FROM statement
 }

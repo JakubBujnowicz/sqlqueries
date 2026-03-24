@@ -2,66 +2,30 @@
 % Please edit documentation in R/sql_parse.R
 \name{sql_parse}
 \alias{sql_parse}
+\alias{.sql_parse}
 \alias{.parse}
-\alias{.parse.sql_case}
-\alias{.parse.sql_create_table}
-\alias{.parse.sql_delete}
-\alias{.parse.sql_from}
-\alias{.parse.sql_group_by}
-\alias{.parse.sql_having}
-\alias{.parse.sql_in}
-\alias{.parse.sql_insert}
-\alias{.parse.sql_join}
-\alias{.parse.sql_logical}
-\alias{.parse.sql_order_by}
-\alias{.parse.sql_parenth}
-\alias{.parse.sql_query}
-\alias{.parse.sql_select}
-\alias{.parse.sql_tuple}
-\alias{.parse.sql_update}
-\alias{.parse.sql_where}
-\title{Title}
+\title{Parsing \code{sql} objects into text}
 \usage{
+.sql_parse(x, ...)
+
 .parse(x, fields, ...)
-
-\method{.parse}{sql_case}(x, fields, ...)
-
-\method{.parse}{sql_create_table}(x, fields, ...)
-
-\method{.parse}{sql_delete}(x, fields, ...)
-
-\method{.parse}{sql_from}(x, fields, ...)
-
-\method{.parse}{sql_group_by}(x, fields, ...)
-
-\method{.parse}{sql_having}(x, fields, ...)
-
-\method{.parse}{sql_in}(x, fields, ...)
-
-\method{.parse}{sql_insert}(x, fields, ...)
-
-\method{.parse}{sql_join}(x, fields, ...)
-
-\method{.parse}{sql_logical}(x, fields, break_lines = TRUE, ...)
-
-\method{.parse}{sql_order_by}(x, fields, ...)
-
-\method{.parse}{sql_parenth}(x, fields, ...)
-
-\method{.parse}{sql_query}(x, fields, ...)
-
-\method{.parse}{sql_select}(x, fields, ...)
-
-\method{.parse}{sql_tuple}(x, fields, as_values = FALSE, ...)
-
-\method{.parse}{sql_update}(x, fields, ...)
-
-\method{.parse}{sql_where}(x, fields, ...)
 }
 \arguments{
-\item{...}{}
+\item{x}{a \code{sql} object.}
+
+\item{...}{another arguments passed to \code{.parse()} and corresponding methods.}
+
+\item{fields}{a list passed to \code{.parse} class methods. Internally set
+within \code{.sql_parse()} wrapper to \code{attributes(x)}. The attributes
+are set within object constructors.}
+}
+\value{
+A string with a parsed object --- same attributes, but with formatted
+text.
 }
 \description{
-Title
+The function uses \verb{sql_*} classes methods for \code{.parse} generic to transform
+all the necessary attributes of an object (i.e. data parsed when constructing)
+to create a formatted (parsed) text of the statement/query.
 }
 \keyword{internal}
