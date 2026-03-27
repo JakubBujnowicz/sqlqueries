@@ -2,9 +2,7 @@
 % Please edit documentation in R/sql_select.R
 \name{.parse.sql_select}
 \alias{.parse.sql_select}
-\title{Internal parser for \code{sql_select} objects
-
-Some description}
+\title{Internal parser for \code{sql_select} objects}
 \usage{
 \method{.parse}{sql_select}(x, fields, ...)
 }
@@ -19,7 +17,5 @@ are set within object constructors.}
 }
 \description{
 Internal parser for \code{sql_select} objects
-
-Some description
 }
 \keyword{internal}

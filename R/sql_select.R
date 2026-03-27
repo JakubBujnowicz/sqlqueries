@@ -10,7 +10,7 @@
 #'   clause.
 #' @param .top_with_ties a logical value. If `TRUE`, adds "WITH TIES" to the
 #'   "TOP" clause.
-#' @param .defuse a logical value. Whether to defuse the input arguments in `...`.
+#' @template param_dot-defuse
 #'
 #' @return A character string representing the SQL SELECT statement, with S3
 #'   class 'sql_select'.
@@ -66,5 +66,4 @@ sql_select <- function(..., .distinct = FALSE,
     rslt <- .indent(rslt, by = 4)
     return(rslt)
 }
-
 

@@ -20,5 +20,5 @@ A character string representing the SQL FROM statement, with S3
 class 'sql_from'.
 }
 \description{
-Construct a SQL FROM statement
+DESCRIPTION TO BE WRITTEN
 }
