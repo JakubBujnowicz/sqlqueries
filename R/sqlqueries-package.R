@@ -22,7 +22,7 @@ NULL
     keyfuns <- paste0("sql_", keywords)
     infix_funs <- paste0("%", c("OR", "AND", "IN"), "%")
     allfuns <- c(keyfuns, infix_funs,
-                ".sql_parenth")
+                "sql_parenth")
 
     defusables <- paste0("sql_",
                         c("query", "select", "where",

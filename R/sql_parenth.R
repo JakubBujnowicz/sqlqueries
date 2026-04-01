@@ -3,10 +3,9 @@
 #' @param ...
 #'
 #' @return
+#' @export
 #'
-#' @keywords internal
-#'
-.sql_parenth <- function(x)
+sql_parenth <- function(x)
 {
     rslt <- .new_sql(class = "sql_parenth",
                      fields = list(contains = x))
@@ -30,3 +29,5 @@
     rslt <- .indent(rslt, by = 1)
     return(rslt)
 }
+
+

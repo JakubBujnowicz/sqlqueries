@@ -120,7 +120,7 @@
         if (!is.null(nm) && nm %in% .sql$keywords) {
             call <- .rename_call(call, name = paste0("sql_", nm))
         } else if (!is.null(nm) && nm == "(") {
-            call <- .rename_call(call, ".sql_parenth")
+            call <- .rename_call(call, "sql_parenth")
         }
 
         # First defusing takes care of every call in the call fields,
