@@ -13,7 +13,8 @@ sql_condition(..., .defuse = TRUE)
 should be defused. For more information about defusing, see \link{sql_defusing}.}
 }
 \value{
-A condition object.
+A character string representing the logical conditions, with S3
+class 'sql_logical'.
 }
 \description{
 TO BE WRITTEN

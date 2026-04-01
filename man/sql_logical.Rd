@@ -10,7 +10,7 @@
 \alias{.new_logical}
 \alias{sql_or}
 \alias{\%OR\%}
-\title{Title}
+\title{Internal function for creating logical conditions}
 \usage{
 sql_and(x, y)
 
@@ -27,8 +27,17 @@ sql_or(x, y)
 x \%OR\% y
 }
 \arguments{
-\item{operator}{}
+\item{x, y}{non-empty strings, input arguments for the logical operator.}
+
+\item{operator}{a non-empty string, name of the logical operator to be
+used (e.g. \code{"and"} or \code{"or"}).}
+}
+\value{
+A character string representing the logical conditions, with S3
+class 'sql_logical'.
 }
 \description{
-Title
+This works as a template for creating logical conditions in a object-oriented
+matterd, e.g. AND or OR.
 }
+\keyword{internal}

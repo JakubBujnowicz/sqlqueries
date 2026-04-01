@@ -5,3 +5,5 @@
 ^package_building.R$
 ^README\.Rmd$
 ^codecov\.yml$
+^man-roxygen$
+

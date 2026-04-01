@@ -8,7 +8,7 @@
 #' @examples
 sql_where <- function(..., .defuse = TRUE)
 {
-    assert_flag(.defuse)
+    checkmate::assert_flag(.defuse)
 
     condition <- sql_condition(..., .defuse = .defuse)
 
@@ -26,3 +26,5 @@ sql_where <- function(..., .defuse = TRUE)
     rslt <- .indent(rslt, by = 4)
     return(rslt)
 }
+
+
