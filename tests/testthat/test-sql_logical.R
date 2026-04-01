@@ -12,8 +12,8 @@ dt <- data.table(w = sample(k, n, TRUE),
 
 
 # Tests ------------------------------------------------------------------------
-test_that(".new_logical() runs", {
-    cond <- .new_logical("x = 1", "y = 1", "or")
+test_that("sql_logical() runs", {
+    cond <- sql_logical("x = 1", "y = 1", "or")
 
     target <- dt[x == 1 | y == 1]
     query <- sql(select("*"),
@@ -23,15 +23,15 @@ test_that(".new_logical() runs", {
     expect_identical(.sqldf(query), target)
 
     # Also with some other custom operators
-    cond <- .new_logical("x = 1", "y = 1", "xor")
+    cond <- sql_logical("x = 1", "y = 1", "xor")
     checkmate::expect_string(
         cond, pattern = "x = 1.*XOR.*y = 1")
 })
 
-test_that(".new_logical() works with sql_conditions", {
+test_that("sql_logical() works with sql_conditions", {
     target <- dt[x == 1 & y == 1 | z > 2]
 
-    cond <- .new_logical("x = 1" %AND% "y = 1",
+    cond <- sql_logical("x = 1" %AND% "y = 1",
                          "z > 2",
                          operator = "or")
     query <- sql(select("*"),
@@ -41,9 +41,9 @@ test_that(".new_logical() works with sql_conditions", {
     expect_identical(.sqldf(query), target)
 })
 
-test_that(".new_logical() validates inputs", {
-    expect_error(.new_logical())
-    expect_error(.new_logical("a", sum))
+test_that("sql_logical() validates inputs", {
+    expect_error(sql_logical())
+    expect_error(sql_logical("a", sum))
 })
 
 

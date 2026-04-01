@@ -10,10 +10,9 @@
 #' @return A character string representing the logical conditions, with S3
 #'   class 'sql_logical'.
 #'
-#' @name sql_logical
-#' @keywords internal
+#' @export
 #'
-.new_logical <- function(x, y, operator)
+sql_logical <- function(x, y, operator)
 {
     checkmate::assert_string(x, min.chars = 1L)
     checkmate::assert_string(y, min.chars = 1L)
@@ -43,6 +42,60 @@
 }
 
 
+#' @rdname sql_logical
+#'
+#' @param ... Arguments to be processed, representing conditions.
+#' @template param_dot-defuse
+#'
+#' @export
+#'
+sql_condition <- function(..., .defuse = TRUE)
+{
+    checkmate::assert_flag(.defuse)
+
+    condition <- .sql_prepare(..., defuse = .defuse)
+    condition <- Reduce(sql_and, condition)
+
+    return(condition)
+}
+
+
+# Operators --------------------------------------------------------------------
+#' @rdname sql_logical
+#' @export
+#'
+sql_and <- function(x, y)
+{
+    rslt <- sql_logical(x = x, y = y,
+                        operator = "and")
+    return(rslt)
+}
+
+
+#' @rdname sql_logical
+#' @export
+#'
+sql_or <- function(x, y)
+{
+    rslt <- sql_logical(x = x, y = y,
+                        operator = "or")
+    return(rslt)
+}
+
+
+#' @rdname sql_logical
+#' @export
+#'
+`%AND%` <- sql_and
+
+
+#' @rdname sql_logical
+#' @export
+#'
+`%OR%` <- sql_or
+
+
+# Parsing ----------------------------------------------------------------------
 #' Internal parser for `sql_logical` objects
 #'
 #' @inheritParams sql_parse
