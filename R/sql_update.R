@@ -1,11 +1,23 @@
+#' Construct a SQL UPDATE statement
+#'
+#' DESCRIPTION TO BE WRITTEN
+#'
+#' @param table a single string with the name of the table to update.
+#' @param set a list, every element must be named (with unique names) and
+#'   must contain only a scalar value.
+#'
+#' @return A character string representing the SQL UPDATE statement, with S3
+#'   class 'sql_update'.
+#' @export
+#'
 sql_update <- function(table, set)
 {
     # Assertions
-    assert_string(table)
-    assert_list(set, min.len = 1)
-    assert_names(names(set), type = "unique")
+    checkmate::assert_string(table)
+    checkmate::assert_list(set, min.len = 1)
+    checkmate::assert_names(names(set), type = "unique")
     for (i in seq_along(set)) {
-        assert_scalar(set[[i]], na.ok = TRUE, null.ok = TRUE)
+        checkmate::assert_scalar(set[[i]], na.ok = TRUE, null.ok = TRUE)
     }
 
     # Create the object
@@ -18,12 +30,17 @@ sql_update <- function(table, set)
 
 
 
+#' Internal parser for `sql_update` objects
+#'
+#' @inheritParams sql_parse
+#' @keywords internal
+#'
 .parse.sql_update <- function(x, fields, ...)
 {
     update <- paste0("UPDATE\n", fields$table)
     update <- .indent(update, by = 4)
 
-    .prepare <- function(x)
+    .prepare_scalar <- function(x)
     {
         if (is.na(x) || is.null(x)) {
             x <- "NULL"
@@ -34,7 +51,7 @@ sql_update <- function(table, set)
         return(x)
     }
 
-    set <- lapply(fields$set, .prepare)
+        set <- lapply(fields$set, .prepare_scalar)
 
     set <- paste(format(names(set)), "=", set,
                   collapse = ",\n")
@@ -42,3 +59,5 @@ sql_update <- function(table, set)
     rslt <- paste0(update, "\nSET\n", set)
     return(rslt)
 }
+
+

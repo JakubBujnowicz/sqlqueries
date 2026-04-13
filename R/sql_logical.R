@@ -1,7 +1,7 @@
 #' Internal function for creating logical conditions
 #'
 #' This works as a template for creating logical conditions in a object-oriented
-#' matterd, e.g. AND or OR.
+#' matter, e.g. AND or OR.
 #'
 #' @param x,y non-empty strings, input arguments for the logical operator.
 #' @param operator a non-empty string, name of the logical operator to be

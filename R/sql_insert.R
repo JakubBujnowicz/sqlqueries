@@ -1,13 +1,29 @@
+#' Create a SQL INSERT statement
+#'
+#' @param into a single non-empty string, the name of a table to insert into.
+#' @param values a data frame with at least one row, used as VALUES for
+#'   inserting. Values (columns) from the data frame are coerced into character
+#'   vectors (through [sqlqueries::sql_tuple()]).
+#' @param query a `sql_query` object, may be used to insert through a select
+#'   query.
+#' @param columns a character vector, can be used to insert into only a selected
+#'   subset of columns of `into` table.
+#'
+#' @return A character string representing the SQL INSERT statement, with S3
+#'   class 'sql_insert'.
+#' @export
+#'
 sql_insert <- function(into, values = NULL, query = NULL, columns = NULL)
 {
-    assert_string(into, min.chars = 1L)
-    assert_character(columns, min.chars = 1, min.len = 1,
-                     any.missing = FALSE, null.ok = TRUE)
-    assert_data_frame(values, min.rows = 1, null.ok = TRUE)
+    checkmate::assert_string(into, min.chars = 1L)
+    checkmate::assert_character(columns, min.chars = 1, min.len = 1,
+                                any.missing = FALSE, null.ok = TRUE)
+    checkmate::assert_data_frame(values, min.rows = 1, null.ok = TRUE)
     if (!is.null(values)) {
-        assert_names(names(values), type = "unique", must.include = columns)
+        checkmate::assert_names(names(values), type = "unique",
+                                must.include = columns)
     }
-    assert_class(query, classes = "sql_query", null.ok = TRUE)
+    checkmate::assert_class(query, classes = "sql_query", null.ok = TRUE)
 
     if (!xor(is.null(values), is.null(query))) {
         stop("'values' and 'query' cannot be filled in a single INSERT statement")
@@ -24,6 +40,11 @@ sql_insert <- function(into, values = NULL, query = NULL, columns = NULL)
 
 
 
+#' Internal parser for `sql_insert` objects
+#'
+#' @inheritParams sql_parse
+#' @keywords internal
+#'
 .parse.sql_insert <- function(x, fields, ...)
 {
     vals <- as.list(fields$values)

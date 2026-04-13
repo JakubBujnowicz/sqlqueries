@@ -1,10 +1,24 @@
+#' Construct a SQL CASE WHEN statement
+#'
+#' DESCRIPTION TO BE WRITTEN
+#'
+#' @param ... an atomic vector of conditions and values. Must be of even length.
+#'   Represents a sequence of `when1`, `then1`, `when2`, `then2` and so on...
+#' @param .else optional scalar value. If not `NULL`, then the provided value
+#'   is used for the finale ELSE statement.
+#'
+#' @return A character string representing the SQL CASE WHEN statement, with S3
+#'   class 'sql_case'.
+#' @export
+#'
 sql_case <- function(..., .else = NULL)
 {
     x <- c(...)
-    assert_atomic_vector(x, min.len = 2,
-                         .var.name = "...")
-    assert_true(length(x) %% 2 == 0,
-                .var.name = "length of '...' is even")
+    checkmate::assert_atomic_vector(x, min.len = 2,
+                                    .var.name = "...")
+    checkmate::assert_true(length(x) %% 2 == 0,
+                           .var.name = "length of '...' is even")
+    checkmate::assert_scalar(.else, null.ok = TRUE)
 
     rslt <- .new_sql(class = "sql_case",
                      fields = list(cases = x,
@@ -13,7 +27,11 @@ sql_case <- function(..., .else = NULL)
     return(rslt)
 }
 
+#' Internal parser for `sql_case` objects
+#'
+#' @inheritParams sql_parse
 #' @keywords internal
+#'
 .parse.sql_case <- function(x, fields, ...)
 {
     x <- fields$cases

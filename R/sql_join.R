@@ -1,12 +1,28 @@
+#' Construct a SQL JOIN statement
+#'
+#' DESCRIPTION TO BE WRITTEN
+#'
+#' @param table a single, non-empty string with the name of the table to join.
+#' @param on a single, non-empty string with a condition to join on.
+#' @param type a single string, the type of join. Possible values are:
+#'    `"inner"`, `"left"`, `"right"`, `"full"`, `"key"`).
+#' @param alias a single string or `NULL`. If provided, serves as an alias for
+#'  the joined table.
+#'
+#' @return A character string representing the SQL JOIN statement, with S3
+#'   class 'sql_join'.
+#' @export
+#'
 sql_join <- function(table, on, type = "inner", alias = NULL)
 {
-    assert_string(table, min.chars = 1L)
-    assert_string(on, min.chars = 1L)
-    assert_string(type, min.chars = 1L)
+    checkmate::assert_string(table, min.chars = 1L)
+    checkmate::assert_string(on, min.chars = 1L)
+    checkmate::assert_string(type, min.chars = 1L)
     type <- tolower(type)
-    assert_choice(type, choices = c("inner", "left", "right", "full", "key"))
-    assert_string(alias, null.ok = TRUE,
-                  min.chars = 1L)
+    checkmate::assert_choice(type,
+                             choices = c("inner", "left", "right", "full", "key"))
+    checkmate::assert_string(alias, null.ok = TRUE,
+                             min.chars = 1L)
 
     rslt <- .new_sql(class = "sql_join",
                      fields = list(table = table,
@@ -19,6 +35,11 @@ sql_join <- function(table, on, type = "inner", alias = NULL)
 
 
 
+#' Internal parser for `sql_join` objects
+#'
+#' @inheritParams sql_parse
+#' @keywords internal
+#'
 .parse.sql_join <- function(x, fields, ...)
 {
     tab <- fields$table
@@ -44,3 +65,5 @@ sql_join <- function(table, on, type = "inner", alias = NULL)
     rslt <- .indent(rslt, by = 4L)
     return(rslt)
 }
+
+

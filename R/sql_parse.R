@@ -1,11 +1,10 @@
-# Outer function for parsing ---------------------------------------------------
 #' Parsing `sql` objects into text
 #'
 #' The function uses `sql_*` classes methods for `.parse` generic to transform
 #' all the necessary attributes of an object (i.e. data parsed when constructing)
 #' to create a formatted (parsed) text of the statement/query.
 #'
-#' @param x a `sql` object.
+#' @param x a `sql` object or a single string.
 #' @param fields a list passed to `.parse` class methods. Internally set
 #'   within `.sql_parse()` wrapper to `attributes(x)`. The attributes
 #'   are set within object constructors.
@@ -13,10 +12,9 @@
 #'
 #' @return A string with a parsed object --- same attributes, but with formatted
 #'   text.
+#' @keywords internal
 #'
 #' @name sql_parse
-#'
-#' @keywords internal
 #'
 .sql_parse <- function(x, ...)
 {
@@ -26,7 +24,7 @@
         return(x)
     }
 
-    message("Parsing: ", .mclass(x), "...")
+    message("Parsing: ", .main_class(x), "...")
 
     attrs <- attributes(x)
     rslt <- .parse(x = x, fields = attrs$fields, ...)
@@ -35,7 +33,6 @@
 }
 
 
-# Internal parser method -------------------------------------------------------
 #' A generic for parsing
 #'
 #' @rdname sql_parse
@@ -45,7 +42,5 @@
 {
     UseMethod(".parse")
 }
-
-
 
 

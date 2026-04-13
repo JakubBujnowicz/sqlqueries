@@ -1,8 +1,24 @@
+#' Glue data into SQL objects
+#'
+#' A wrapper for [glue::glue_data()], which preserves attributes for `sql`
+#' objects.
+#'
+#' Note that underlying [glue::glue_data()] is called with `.trim = FALSE`.
+#'
+#' @param sql a single string or a `sql` object.
+#' @inheritParams glue::glue_data
+#'
+#' @return A single string with `"{some_variable}"` text elements replaced.
+#'   If `sql` was an object of `sql` class, the class and associated attributes
+#'   are preserved.
+#' @export
+#'
 sql_glue <- function(sql, .x, ...)
 {
-    assert(check_class(sql, classes = "sql"),
-           check_string(sql, min.chars = 1),
-           combine = "or")
+    checkmate::assert(
+        checkmate::check_class(sql, classes = "sql"),
+        checkmate::check_string(sql, min.chars = 1),
+        combine = "or")
 
     attrs <- attributes(sql)
 
@@ -14,3 +30,5 @@ sql_glue <- function(sql, .x, ...)
     attributes(rslt) <- attrs
     return(rslt)
 }
+
+

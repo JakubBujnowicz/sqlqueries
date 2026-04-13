@@ -1,6 +1,17 @@
+#' Construct a SQL ORDER BY statement
+#'
+#' DESCRIPTION TO BE WRITTEN
+#'
+#' @eval .docs_dots_columns(purpose = "columns to order by")
+#' @template param_dot-defuse
+#'
+#' @return A character string representing the SQL ORDER BY statement, with S3
+#'   class 'sql_order_by'.
+#' @export
+#'
 sql_order_by <- function(..., .defuse = TRUE)
 {
-    assert_flag(.defuse)
+    checkmate::assert_flag(.defuse)
 
     cols <- .columns_picker(..., .defuse = .defuse)
 
@@ -12,10 +23,15 @@ sql_order_by <- function(..., .defuse = TRUE)
 
 
 
+#' Internal parser for `sql_order_by` objects
+#'
+#' @inheritParams sql_parse
+#' @keywords internal
+#'
 .parse.sql_order_by <- function(x, fields, ...)
 {
     header <- "ORDER BY"
-    rslt <- paste(header, .columns_parser(fields$columns), sep = "\n")
+    rslt <- paste(header, .columns_formatter(fields$columns), sep = "\n")
     rslt <- .indent(rslt, by = 4)
     return(rslt)
 }

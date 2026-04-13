@@ -2,13 +2,21 @@
 % Please edit documentation in R/sql_having.R
 \name{sql_having}
 \alias{sql_having}
-\title{Title}
+\title{Construct a SQL HAVING statement}
 \usage{
 sql_having(..., .defuse = TRUE)
 }
 \arguments{
-\item{condition}{}
+\item{...}{logical conditions to include. Can be character strings
+or results of other \code{sql} objects (e.g. \code{\link[=sql_or]{sql_or()}}).}
+
+\item{.defuse}{a logical value. Decides whether input arguments in \code{...}
+should be defused. For more information about defusing, see \link{sql_defusing}.}
+}
+\value{
+A character string representing the SQL HAVING statement, with S3
+class 'sql_having'.
 }
 \description{
-Title
+DESCRIPTION TO BE WRITTEN
 }

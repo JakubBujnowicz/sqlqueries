@@ -2,8 +2,7 @@
 #'
 #' DESCRIPTION TO BE WRITTEN
 #'
-#' @param ... Columns to select. Can be unquoted column names, character strings,
-#'   or results of other `sql` objects (e.g. [sqlqueries::sql_case()]).
+#' @eval .docs_dots_columns(purpose = "columns to select", aliases = TRUE)
 #' @param .distinct a logical value. If `TRUE`, adds "DISTINCT" to the query.
 #' @param .top a single number. If provided, adds a "TOP" clause.
 #' @param .top_percent a logical value. If `TRUE`, adds "PERCENT" to the "TOP"
@@ -62,7 +61,7 @@ sql_select <- function(..., .distinct = FALSE,
         }
     }
 
-    rslt <- paste(header, .columns_parser(fields$columns), sep = "\n")
+    rslt <- paste(header, .columns_formatter(fields$columns), sep = "\n")
     rslt <- .indent(rslt, by = 4)
     return(rslt)
 }

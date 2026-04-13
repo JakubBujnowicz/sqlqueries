@@ -1,11 +1,15 @@
-#' Title
+#' Construct a SQL WHERE statement
 #'
-#' @param condition
+#' DESCRIPTION TO BE WRITTEN
 #'
-#' @return
+#' @param ... logical conditions to include. Can be character strings
+#'   or results of other `sql` objects (e.g. [sqlqueries::sql_or()]).
+#' @template param_dot-defuse
+#'
+#' @return A character string representing the SQL WHERE statement, with S3
+#'   class 'sql_where'.
 #' @export
 #'
-#' @examples
 sql_where <- function(..., .defuse = TRUE)
 {
     checkmate::assert_flag(.defuse)
@@ -19,7 +23,11 @@ sql_where <- function(..., .defuse = TRUE)
 }
 
 
-
+#' Internal parser for `sql_where` objects
+#'
+#' @inheritParams sql_parse
+#' @keywords internal
+#'
 .parse.sql_where <- function(x, fields, ...)
 {
     rslt <- paste("WHERE", fields$condition, sep = "\n")

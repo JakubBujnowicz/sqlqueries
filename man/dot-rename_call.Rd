@@ -2,14 +2,19 @@
 % Please edit documentation in R/utils.R
 \name{.rename_call}
 \alias{.rename_call}
-\title{Title}
+\title{Change the name of a call without modifying arguments}
 \usage{
 .rename_call(call, name)
 }
 \arguments{
-\item{name}{}
+\item{call}{a call to be modified.}
+
+\item{name}{a single string, new name for the call.}
+}
+\value{
+The call with a modified name.
 }
 \description{
-Title
+Change the name of a call without modifying arguments
 }
 \keyword{internal}

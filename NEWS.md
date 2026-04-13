@@ -1,3 +1,4 @@
-# sqlqueries 0.0.0.9000
+# sqlqueries (development version)
 
 * Added a `NEWS.md` file to track changes to the package.
+

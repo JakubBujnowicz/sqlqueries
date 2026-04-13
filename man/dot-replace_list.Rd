@@ -2,14 +2,33 @@
 % Please edit documentation in R/utils.R
 \name{.replace_list}
 \alias{.replace_list}
-\title{Title}
+\title{Replace elements of a list with another list}
 \usage{
 .replace_list(x, what, where)
 }
 \arguments{
-\item{where}{}
+\item{x}{a list.}
+
+\item{what}{a list with replacement values. All values will be put into \code{x}.
+Atomic vectors are coerced to lists and appended, hence it is possible
+for the output vector to be longer than \code{x}.}
+
+\item{where}{an integer vector of indices of \code{x} list to be replaced.}
+}
+\value{
+The list \code{x} with replaced elements.
 }
 \description{
-Title
+This takes a list \code{x} and replaces its elements in indices \code{where} with
+all elements of \code{what} list.
+}
+\examples{
+\dontrun{
+    x <- as.list(letters[1:6])
+    what <- list(1:3, sum)
+    where <- c(2, 5)
+    .replace_list(x, what = what, where = where)
+}
+
 }
 \keyword{internal}

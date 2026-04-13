@@ -2,13 +2,17 @@
 % Please edit documentation in R/sql_methods.R
 \name{+.sql}
 \alias{+.sql}
-\title{Title}
+\title{"Add" SQL objects}
 \usage{
 \method{+}{sql}(e1, e2)
 }
 \arguments{
-\item{...}{}
+\item{e1, e2}{\code{sql} objects to "add" (compose into a single query).}
+}
+\value{
+A \code{sql_query} object.
 }
 \description{
-Title
+Addition operator serves as a wrapper for composing two elements into a
+single \code{\link[=sql_query]{sql_query()}}.
 }

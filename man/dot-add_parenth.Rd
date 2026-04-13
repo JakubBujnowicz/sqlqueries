@@ -2,13 +2,21 @@
 % Please edit documentation in R/utils.R
 \name{.add_parenth}
 \alias{.add_parenth}
-\title{Title}
+\title{Add parentheses around a string}
 \usage{
 .add_parenth(str, indent = TRUE)
 }
 \arguments{
-\item{indent}{}
+\item{str}{a single string, often \code{sql} objects.}
+
+\item{indent}{a logical value, decides whether indentation should match the
+newly created parentheses.}
+}
+\value{
+The \code{str} string wrapped with parentheses.
 }
 \description{
-Title
+Meant for modifying \code{sql} objects safely (preserving attributes) and wrapping
+them in parentheses additionally indenting where necessary.
 }
+\keyword{internal}

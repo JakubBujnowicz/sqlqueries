@@ -1,20 +1,26 @@
-#' Title
+#' Create SQL queries
 #'
-#' @param ...
+#' DESCRIPTION TO BE WRITTEN
 #'
-#' @return
+#' `sql()` is a shorthand for `sql_query()`.
+#'
+#' @param ... elements of the query, either single strings or other `sql` objects.
+#' @param .glue `NULL` or a list, data.frame or environment to glue strings
+#'   with [sqlqueries::sql_glue()]. No gluing is done if `NULL` is provided.
+#' @template param_dot-defuse
+#'
+#' @return A character string with a SQL query, with S3 class 'sql_query'.
 #' @export
 #'
-#' @examples
 sql_query <- function(..., .glue = NULL, .defuse = TRUE)
 {
     # Assertions
-    assert_flag(.defuse)
+    checkmate::assert_flag(.defuse)
 
     ev_exprs <- .sql_prepare(..., defuse = .defuse)
 
     # Set names
-    nms <- sapply(ev_exprs, .mclass)
+    nms <- sapply(ev_exprs, .main_class)
     names(ev_exprs) <- toupper(str_remove(nms, "^sql_"))
 
     rslt <- .new_sql(class = "sql_query",
@@ -34,9 +40,15 @@ sql_query <- function(..., .glue = NULL, .defuse = TRUE)
 sql <- sql_query
 
 
-
+#' Internal parser for `sql_query` objects
+#'
+#' @inheritParams sql_parse
+#' @keywords internal
+#'
 .parse.sql_query <- function(x, fields, ...)
 {
     rslt <- do.call(paste0, args = list(fields, collapse = "\n"))
     return(rslt)
 }
+
+

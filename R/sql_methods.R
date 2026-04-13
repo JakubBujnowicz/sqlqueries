@@ -1,32 +1,39 @@
-#' Title
+#' Print SQL objects
 #'
-#' @param x
-#' @param ...
+#' DESCRIPTION TO BE WRITTEN.
 #'
-#' @return
+#' @inheritParams base::print
+#'
+#' @return Returns `x` invisibly.
 #' @export
 #'
-#' @examples
 print.sql <- function(x, ...)
 {
     k <- max(nchar(strsplit(x, "\n")[[1]]))
+    # Upper limit
+    k <- min(50, k)
     cat(paste0("/* [sqlqueries] */",
                "\n", strrep("-", k),
                "\n", x,
                "\n", strrep("-", k),
                "\n"))
+    return(invisible(x))
 }
 
-#' Title
+
+#' "Add" SQL objects
 #'
-#' @param x
-#' @param ...
+#' Addition operator serves as a wrapper for composing two elements into a
+#' single [sqlqueries::sql_query()].
 #'
-#' @return
+#' @param e1,e2 `sql` objects to "add" (compose into a single query).
+#'
+#' @return A `sql_query` object.
 #' @export
 #'
-#' @examples
 `+.sql` <- function(e1, e2)
 {
     sql_query(e1, e2, .defuse = FALSE)
 }
+
+

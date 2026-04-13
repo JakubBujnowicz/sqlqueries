@@ -3,15 +3,27 @@
 \name{sql_query}
 \alias{sql_query}
 \alias{sql}
-\title{Title}
+\title{Create SQL queries}
 \usage{
 sql_query(..., .glue = NULL, .defuse = TRUE)
 
 sql(..., .glue = NULL, .defuse = TRUE)
 }
 \arguments{
-\item{...}{}
+\item{...}{elements of the query, either single strings or other \code{sql} objects.}
+
+\item{.glue}{\code{NULL} or a list, data.frame or environment to glue strings
+with \code{\link[=sql_glue]{sql_glue()}}. No gluing is done if \code{NULL} is provided.}
+
+\item{.defuse}{a logical value. Decides whether input arguments in \code{...}
+should be defused. For more information about defusing, see \link{sql_defusing}.}
+}
+\value{
+A character string with a SQL query, with S3 class 'sql_query'.
 }
 \description{
-Title
+DESCRIPTION TO BE WRITTEN
+}
+\details{
+\code{sql()} is a shorthand for \code{sql_query()}.
 }

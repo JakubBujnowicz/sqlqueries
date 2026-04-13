@@ -7,7 +7,7 @@
 \method{.parse}{sql_from}(x, fields, ...)
 }
 \arguments{
-\item{x}{a \code{sql} object.}
+\item{x}{a \code{sql} object or a single string.}
 
 \item{fields}{a list passed to \code{.parse} class methods. Internally set
 within \code{.sql_parse()} wrapper to \code{attributes(x)}. The attributes

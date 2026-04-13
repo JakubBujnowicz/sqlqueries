@@ -11,7 +11,7 @@
 .parse(x, fields, ...)
 }
 \arguments{
-\item{x}{a \code{sql} object.}
+\item{x}{a \code{sql} object or a single string.}
 
 \item{...}{another arguments passed to \code{.parse()} and corresponding methods.}
 

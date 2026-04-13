@@ -2,14 +2,27 @@
 % Please edit documentation in R/utils.R
 \name{.new_sql}
 \alias{.new_sql}
-\title{Title}
+\title{Create a new \code{sql} object}
 \usage{
 .new_sql(class, fields)
 }
 \arguments{
+\item{class}{a single string, the main class of a \code{sql} object, e.g. \code{"sql_select"}.}
+
 \item{fields}{}
 }
+\value{
+An empty string with a proper \code{sql} object structure, ready for parsing.
+}
 \description{
-Title
+Creates an empty string with a proper structure:
+\itemize{
+\item Must have at least three classes --- main \code{sql_} class, general \code{sql} class
+and \code{character} class.
+\item Must have a \code{field} attribute with all relevant data for object parsing.
+}
+}
+\details{
+The object is modified into a proper string (non-empty) only during parsing.
 }
 \keyword{internal}

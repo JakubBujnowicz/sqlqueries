@@ -2,14 +2,33 @@
 % Please edit documentation in R/utils.R
 \name{.indent}
 \alias{.indent}
-\title{Title}
+\title{Indent a string}
 \usage{
 .indent(str, by, indent_first = FALSE)
 }
 \arguments{
-\item{indent_first}{}
+\item{str}{a string to indent.}
+
+\item{by}{a positive integer, amount of spaces to indent by.}
+
+\item{indent_first}{a logical value, whether the first line should be indented
+as well.}
+}
+\value{
+The string with indented lines.
 }
 \description{
-Title
+This takes a string \code{str} and indents every line (separating by \verb{\\n} signs")
+by a certain amount of spaces (\code{by}).
+}
+\examples{
+\dontrun{
+    string <- "The first line\nAnd one more\nAnd the last"
+    cat(string, "\n\n")
+
+    cat(.indent(string, by = 4), "\n\n")
+    cat(.indent(string, by = 2, indent_first = TRUE))
+}
+
 }
 \keyword{internal}

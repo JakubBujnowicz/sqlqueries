@@ -1,12 +1,15 @@
-#' Title
+#' Add parentheses around a string
 #'
-#' @param str
-#' @param indent
+#' Meant for modifying `sql` objects safely (preserving attributes) and wrapping
+#' them in parentheses additionally indenting where necessary.
 #'
-#' @return
-#' @export
+#' @param str a single string, often `sql` objects.
+#' @param indent a logical value, decides whether indentation should match the
+#'   newly created parentheses.
 #'
-#' @examples
+#' @return The `str` string wrapped with parentheses.
+#' @keywords internal
+#'
 .add_parenth <- function(str, indent = TRUE)
 {
     attrs <- attributes(str)
@@ -17,41 +20,57 @@
 
     str <- paste0("(", str, ")")
     attributes(str) <- attrs
-    # attr(str, "add_parenth") <- TRUE
     return(str)
 }
 
 
-#' Title
+#' Align lengths of the last lines to the longest string
 #'
-#' @param strings
+#' This function adds spaces at the end of the last line of every string
+#' in `strings`, so that the last line has the same amount of characters
+#' as the longest line in ALL strings in `strings`.
+#' This is useful for aligning "AS" statements, e.g. in SELECT.
 #'
-#' @return
+#' Significance of aligning the last stems from possible multiline expressions,
+#' possibly not strictly necessary in most cases.
 #'
+#' @param strings a character vector of strings to align.
+#'
+#' @return The character vectors with spaces added at the end (if necessary).
 #' @keywords internal
 #'
-.add_spaces <- function(strings)
+.align_lines <- function(strings)
 {
     splt <- strsplit(strings, split = "\n")
     chars <- lapply(splt, nchar)
-    mx <- max(unlist(chars))
-    last <- sapply(chars, tail, 1L)
-    fill <- mx - last
+
+    max_chars <- max(unlist(chars))
+    last_line_chars <- sapply(chars, tail, 1L)
+    fill <- max_chars - last_line_chars
+
     spaces <- strrep(" ", fill)
     rslt <- paste0(strings, spaces)
     return(rslt)
 }
 
-#' Title
+
+#' Prepare a vector
 #'
-#' @param x
-#' @param short
+#' This prepares atomic vectors to be used e.g. in tuples or INSERT statements.
+#' Numerics are always converted to non-scientific version, with precision as long
+#' as possible. `NA` values are replaced with "NULL" strings.
+#' If necessary, alignment is applied, i.e. numerics to the right, characters to
+#' the left, with constant length, so that the output is human readable.
 #'
-#' @return
+#' @param x an atomic vector to align.
+#' @param short a logical value, whether this is meant to be as short as possible.
+#'   That means trimming whitespaces and dropping trailing zeros. Short version
+#'   is used in tuples, whereas longer in INSERTs.
 #'
+#' @return A character vector based on `x`.
 #' @keywords internal
 #'
-.align <- function(x, short = FALSE)
+.prepare_vector <- function(x, short = FALSE)
 {
     nas <- is.na(x)
     rslt <- format(x, digits = abs(floor(log10(.Machine$double.eps)) + 1),
@@ -72,96 +91,33 @@
 }
 
 
-#' Title
+#' Indent a string
 #'
-#' @param obj
-#' @param class
-#' @param fields
+#' This takes a string `str` and indents every line (separating by `\n` signs")
+#' by a certain amount of spaces (`by`).
 #'
-#' @return
-#' @export
+#' @param str a string to indent.
+#' @param by a positive integer, amount of spaces to indent by.
+#' @param indent_first a logical value, whether the first line should be indented
+#'   as well.
 #'
+#' @return The string with indented lines.
 #' @keywords internal
 #'
-.cast2sql <- function(obj, class, fields)
-{
-    obj_name <- deparse(substitute(obj))
-    class(obj) <- c(class, "sql", "character")
-    attr(obj, "fields") <- fields
-    assign(x = obj_name,
-           value = obj,
-           envir = parent.frame())
-}
-
-
-#' Title
+#' @examples
+#' \dontrun{
+#'     string <- "The first line\nAnd one more\nAnd the last"
+#'     cat(string, "\n\n")
 #'
-#' @param quo
-#'
-#' @return
-#'
-#' @keywords internal
-#'
-.defuse_calls <- function(quo)
-{
-    assert_class(quo, classes = "quosure")
-
-    .cancel_defusing <- function(call)
-    {
-        nm <- rlang::call_name(call)
-        call <- rlang::call_match(call, fn = get(nm), defaults = TRUE)
-        call$`.defuse` <- FALSE
-        return(call)
-    }
-
-    .defuse <- function(call)
-    {
-        nm <- rlang::call_name(call)
-        if (!is.null(nm) && nm %in% .sql$keywords) {
-            call <- .rename_call(call, name = paste0("sql_", nm))
-        } else if (!is.null(nm) && nm == "(") {
-            call <- .rename_call(call, "sql_parenth")
-        }
-
-        # First defusing takes care of every call in the call fields,
-        # so no need to do it again
-        defusable <- rlang::is_call(call, name = .sql$defusables)
-        if (defusable) {
-            call <- .cancel_defusing(call)
-        }
-
-        # Apply to further calls within 'call'
-        calls <- sapply(call, rlang::is_call,
-                        name = c(.sql$allfuns, .sql$keywords, "("))
-        if (sum(calls) > 0) {
-            call[calls] <- lapply(call[calls], .defuse)
-        }
-
-        return(call)
-    }
-
-    call <- rlang::quo_get_expr(quo)
-    quo <- rlang::quo_set_expr(quo, .defuse(call))
-
-    return(quo)
-}
-
-
-#' Title
-#'
-#' @param str
-#' @param by
-#' @param indent_first
-#'
-#' @return
-#'
-#' @keywords internal
+#'     cat(.indent(string, by = 4), "\n\n")
+#'     cat(.indent(string, by = 2, indent_first = TRUE))
+#' }
 #'
 .indent <- function(str, by, indent_first = FALSE)
 {
-    assert_string(str)
-    assert_count(by)
-    assert_flag(indent_first)
+    checkmate::assert_string(str)
+    checkmate::assert_count(by)
+    checkmate::assert_flag(indent_first)
 
     ind <- strrep(" ", by)
     str <- str_replace_all(str, "\n", paste0("\n", ind))
@@ -174,33 +130,43 @@
 }
 
 
-#' Title
+#' Replace elements of a list with another list
 #'
-#' @param x
-#' @param what
-#' @param where
+#' This takes a list `x` and replaces its elements in indices `where` with
+#' all elements of `what` list.
 #'
-#' @return
-#' @export
+#' @param x a list.
+#' @param what a list with replacement values. All values will be put into `x`.
+#'   Atomic vectors are coerced to lists and appended, hence it is possible
+#'   for the output vector to be longer than `x`.
+#' @param where an integer vector of indices of `x` list to be replaced.
 #'
+#' @return The list `x` with replaced elements.
 #' @keywords internal
+#'
+#' @examples
+#' \dontrun{
+#'     x <- as.list(letters[1:6])
+#'     what <- list(1:3, sum)
+#'     where <- c(2, 5)
+#'     .replace_list(x, what = what, where = where)
+#' }
 #'
 .replace_list <- function(x, what, where)
 {
     # Assertions
-    assert_list(x)
+    checkmate::assert_list(x)
     n <- length(x)
-    assert_list(what)
+    checkmate::assert_list(what)
     k <- length(what)
-    assert_integerish(where, lower = 1L, upper = n,
-                      len = k)
+    checkmate::assert_integerish(where, lower = 1L, upper = n,
+                                 len = k)
 
     lens <- lengths(what)
     lens <- c(0, lens[-k])
     where_app <- where + cumsum(lens)
 
-    for (i in where_app)
-    {
+    for (i in where_app) {
         j <- match(i, where_app)
         x <- append(x, what[[j]], after = i)
     }
@@ -212,25 +178,30 @@
 
 #' Main class of an object
 #'
-#' @param x
+#' @param x an object to extract the class from.
 #'
-#' @return
-#'
+#' @return The first class of the object, as given by `class()`.
 #' @keywords internal
 #'
-.mclass <- function(x)
+.main_class <- function(x)
 {
     class(x)[1]
 }
 
 
-#' Title
+#' Create a new `sql` object
 #'
-#' @param class
+#' Creates an empty string with a proper structure:
+#' * Must have at least three classes --- main `sql_` class, general `sql` class
+#'   and `character` class.
+#' * Must have a `field` attribute with all relevant data for object parsing.
+#'
+#' The object is modified into a proper string (non-empty) only during parsing.
+#'
+#' @param class a single string, the main class of a `sql` object, e.g. `"sql_select"`.
 #' @param fields
 #'
-#' @return
-#'
+#' @return An empty string with a proper `sql` object structure, ready for parsing.
 #' @keywords internal
 #'
 .new_sql <- function(class, fields)
@@ -242,20 +213,21 @@
 }
 
 
-#' Title
+#' Change the name of a call without modifying arguments
 #'
-#' @param call
-#' @param name
+#' @param call a call to be modified.
+#' @param name a single string, new name for the call.
 #'
-#' @return
-#'
+#' @return The call with a modified name.
 #' @keywords internal
 #'
 .rename_call <- function(call, name)
 {
-    assert_multi_class(call, classes = c("call", "("))
-    assert_string(name, min.chars = 1)
+    checkmate::assert_multi_class(call, classes = c("call", "("))
+    checkmate::assert_string(name, min.chars = 1)
 
     call[[1]] <- sym(name)
     return(call)
 }
+
+

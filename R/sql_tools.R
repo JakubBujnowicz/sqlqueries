@@ -1,11 +1,17 @@
-is_sql <- function(x)
-{
-    inherits(x, "sql")
-}
-
+#' Convert `sql` objects to list trees
+#'
+#' This function can be used to explore internal structure of `sql` objects,
+#' including data stored in object `fields` attribute. When used e.g. on `sql_query`
+#' objects, the entire tree is returned as a nested list.
+#'
+#' @param x a `sql` object.
+#'
+#' @return A list representing the tree.
+#' @export
+#'
 sql_tree <- function(x)
 {
-    assert_class(x, classes = "sql")
+    checkmate::assert_class(x, classes = "sql")
 
     .get_tree <- function(obj)
     {
@@ -19,9 +25,26 @@ sql_tree <- function(x)
     return(fields)
 }
 
+
+#' Prepare a variables list using Non-Standard Evaluation
+#'
+#' This function converts the provided expressions to character vectors, allowing
+#' for easier inputs for e.g. SELECT statements. When an expression starts with
+#' a minus operator, "DESC" is appended afterwards, which can be used for
+#' easier typing in ORDER BY.
+#'
+#' @param ... Expressions to convert into strings.
+#'
+#' @return A character vector of variables.
+#' @export
+#'
+#' @examples
+#' sql_vars(Var1 = FirstVariable, Var2)
+#' sql_vars(-FirstVariable, Var2)
+#'
 sql_vars <- function(...)
 {
-    exprs <- enexprs(...)
+    exprs <- rlang::enexprs(...)
     minus_calls <- sapply(exprs, rlang::is_call, name = "-")
 
     rslt <- sapply(exprs, deparse)
@@ -35,3 +58,20 @@ sql_vars <- function(...)
 
     return(rslt)
 }
+
+
+#' Check whether object is a `sql` object
+#'
+#' `is_sql()` checks whether an object inherits from the general `sql` class.
+#'
+#' @param x Any object to be checked for `sql` class.
+#'
+#' @return Either `TRUE` or `FALSE`.
+#' @export
+#'
+is_sql <- function(x)
+{
+    inherits(x, "sql")
+}
+
+

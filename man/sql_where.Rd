@@ -2,13 +2,21 @@
 % Please edit documentation in R/sql_where.R
 \name{sql_where}
 \alias{sql_where}
-\title{Title}
+\title{Construct a SQL WHERE statement}
 \usage{
 sql_where(..., .defuse = TRUE)
 }
 \arguments{
-\item{condition}{}
+\item{...}{logical conditions to include. Can be character strings
+or results of other \code{sql} objects (e.g. \code{\link[=sql_or]{sql_or()}}).}
+
+\item{.defuse}{a logical value. Decides whether input arguments in \code{...}
+should be defused. For more information about defusing, see \link{sql_defusing}.}
+}
+\value{
+A character string representing the SQL WHERE statement, with S3
+class 'sql_where'.
 }
 \description{
-Title
+DESCRIPTION TO BE WRITTEN
 }

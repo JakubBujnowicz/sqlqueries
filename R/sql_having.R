@@ -1,14 +1,16 @@
-#' Title
+#' Construct a SQL HAVING statement
 #'
-#' @param condition
+#' DESCRIPTION TO BE WRITTEN
 #'
-#' @return
+#' @inheritParams sql_where
+#'
+#' @return A character string representing the SQL HAVING statement, with S3
+#'   class 'sql_having'.
 #' @export
 #'
-#' @examples
 sql_having <- function(..., .defuse = TRUE)
 {
-    assert_flag(.defuse)
+    checkmate::assert_flag(.defuse)
 
     condition <- sql_condition(..., .defuse = .defuse)
 
@@ -19,10 +21,16 @@ sql_having <- function(..., .defuse = TRUE)
 }
 
 
-
+#' Internal parser for `sql_having` objects
+#'
+#' @inheritParams sql_parse
+#' @keywords internal
+#'
 .parse.sql_having <- function(x, fields, ...)
 {
     rslt <- paste("HAVING", fields$condition, sep = "\n")
     rslt <- .indent(rslt, by = 4)
     return(rslt)
 }
+
+

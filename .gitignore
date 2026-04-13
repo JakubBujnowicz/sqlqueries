@@ -1,3 +1,6 @@
+# Project files
+tars
+
 # Linux KDE files
 .directory
 
@@ -40,3 +43,4 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+

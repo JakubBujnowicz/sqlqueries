@@ -2,13 +2,18 @@
 % Please edit documentation in R/sql_methods.R
 \name{print.sql}
 \alias{print.sql}
-\title{Title}
+\title{Print SQL objects}
 \usage{
 \method{print}{sql}(x, ...)
 }
 \arguments{
-\item{...}{}
+\item{x}{an object used to select a method.}
+
+\item{...}{further arguments passed to or from other methods.}
+}
+\value{
+Returns \code{x} invisibly.
 }
 \description{
-Title
+DESCRIPTION TO BE WRITTEN.
 }

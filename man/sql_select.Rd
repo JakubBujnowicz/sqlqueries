@@ -14,8 +14,7 @@ sql_select(
 )
 }
 \arguments{
-\item{...}{Columns to select. Can be unquoted column names, character strings,
-or results of other \code{sql} objects (e.g. \code{\link[=sql_case]{sql_case()}}).}
+\item{...}{character vectors, columns to select. May also include other \code{sql} objects (e.g.\code{\link[=sql_vars]{sql_vars()}}, \code{\link[=sql_case]{sql_case()}}). Non-character elements are dropped with a warning, after dropping the vector cannot be empty. Vectors may be named to provide column aliases.}
 
 \item{.distinct}{a logical value. If \code{TRUE}, adds "DISTINCT" to the query.}
 
