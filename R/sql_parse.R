@@ -24,8 +24,6 @@
         return(x)
     }
 
-    message("Parsing: ", .main_class(x), "...")
-
     attrs <- attributes(x)
     rslt <- .parse(x = x, fields = attrs$fields, ...)
     attributes(rslt) <- attrs

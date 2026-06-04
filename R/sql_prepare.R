@@ -17,8 +17,6 @@
                          keep = "sql")
 {
     if (defuse) {
-        message("Defusing")
-
         qs <- rlang::enquos(...)
         exprs <- lapply(qs, rlang::quo_get_expr)
         exprs_raw <- lapply(exprs, deparse)
