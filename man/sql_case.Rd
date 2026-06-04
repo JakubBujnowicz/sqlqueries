@@ -11,7 +11,7 @@ sql_case(..., .else = NULL)
 Represents a sequence of \code{when1}, \code{then1}, \code{when2}, \code{then2} and so on...}
 
 \item{.else}{optional scalar value. If not \code{NULL}, then the provided value
-is used for the finale ELSE statement.}
+is used for the final ELSE statement.}
 }
 \value{
 A character string representing the SQL CASE WHEN statement, with S3

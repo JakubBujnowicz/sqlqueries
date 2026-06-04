@@ -19,7 +19,7 @@
 #'
 sql_group_by <- function(..., .defuse = TRUE)
 {
-    assert_flag(.defuse)
+    checkmate::assert_flag(.defuse)
 
     cols <- .columns_picker(..., .defuse = .defuse)
 

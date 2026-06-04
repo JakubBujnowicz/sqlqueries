@@ -60,7 +60,7 @@ sql_join <- function(table, on, type = "inner", alias = NULL)
     tab_name <- names(fields$table)
     if (!is.null(fields$alias)) {
         tab <- paste0(tab, " AS ", fields$alias)
-    } else if (test_string(tab_name, min.chars = 1L)) {
+    } else if (checkmate::test_string(tab_name, min.chars = 1L)) {
         tab <- paste0(tab, " AS ", tab_name)
     }
 

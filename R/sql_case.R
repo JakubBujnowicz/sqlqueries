@@ -7,7 +7,7 @@
 #' @param ... an atomic vector of conditions and values. Must be of even length.
 #'   Represents a sequence of `when1`, `then1`, `when2`, `then2` and so on...
 #' @param .else optional scalar value. If not `NULL`, then the provided value
-#'   is used for the finale ELSE statement.
+#'   is used for the final ELSE statement.
 #'
 #' @return A character string representing the SQL CASE WHEN statement, with S3
 #'   class 'sql_case'.

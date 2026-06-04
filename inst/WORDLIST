@@ -1,7 +1,12 @@
 Codecov
 DESC
 INSERTs
+NSE
+composable
+dml
 formatter
 parenth
+pre
 quosure
 sql
+subquery

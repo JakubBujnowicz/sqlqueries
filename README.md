@@ -5,27 +5,69 @@
 
 <!-- badges: start -->
 
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![R-CMD-check](https://github.com/JakubBujnowicz/sqlqueries/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JakubBujnowicz/sqlqueries/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/JakubBujnowicz/sqlqueries/graph/badge.svg)](https://app.codecov.io/gh/JakubBujnowicz/sqlqueries)
 <!-- badges: end -->
 
-The goal of sqlqueries is to …
+The goal of **sqlqueries** is to build SQL queries programmatically in R
+using composable functions — no string interpolation, messy
+concatenation, or fighting with code formatting.
+
+Writing SQL inside R code usually means embedding long strings with
+`paste()` calls, line breaks, and lost syntax highlighting.
+**sqlqueries** solves this by providing a clean, functional interface
+where each clause is a separate function call. The result is formatted,
+readable SQL that is easy to compose, modify, and maintain.
 
 ## Installation
 
-You can install the development version of sqlqueries from
-[GitHub](https://github.com/) with:
+The package is not yet on CRAN, but you can install the development
+version from GitHub:
 
 ``` r
-# install.packages("pak")
+# pak
 pak::pak("JakubBujnowicz/sqlqueries")
+
+# or devtools
+devtools::install_github("JakubBujnowicz/sqlqueries")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
 ``` r
 library(sqlqueries)
-## basic example code
+
+# Build a query by composing clauses
+query <- sql(
+    select("Species", "Sepal.Length", "Sepal.Width"),
+    from("iris"),
+    where("Species = 'setosa'"),
+    order_by(vars(-Sepal.Length))
+)
+
+query
+#> /* [sqlqueries] */
+#> ----------------------
+#> SELECT
+#>     Species,
+#>     Sepal.Length,
+#>     Sepal.Width
+#> FROM
+#>     iris
+#> WHERE
+#>     Species = 'setosa'
+#> ORDER BY
+#>     Sepal.Length DESC
+#> ----------------------
+```
+
+## Further reading
+
+See the package documentation for a full list of functions:
+
+``` r
+help(package = "sqlqueries")
 ```
