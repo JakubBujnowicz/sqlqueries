@@ -18,5 +18,21 @@ A character string representing the SQL CASE WHEN statement, with S3
 class 'sql_case'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Creates a CASE WHEN expression for conditional logic in SQL. Takes a
+sequence of condition-value pairs: each condition maps to a result,
+and an optional ELSE provides a fallback when no condition matches.
 }
+\examples{
+sql_case("a = 1", 10,
+         "a = 2", 20,
+         .else = 30)
+
+}
+\seealso{
+SQL utility functions:
+\code{\link[=sql_glue]{sql_glue()}},
+\code{\link[=sql_parenth]{sql_parenth()}},
+\code{\link[=sql_tuple]{sql_tuple()}},
+\code{\link[=sql_vars]{sql_vars()}}
+}
+\concept{sql_utilities}

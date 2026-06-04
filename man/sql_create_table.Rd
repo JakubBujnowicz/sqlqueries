@@ -17,9 +17,26 @@ Names must be unique.}
 for the new table.}
 }
 \value{
-A character string representing the SQL FROM statement, with S3
-class 'sql_from'.
+A character string representing the SQL CREATE TABLE statement, with S3
+class 'sql_create_table'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Builds a CREATE TABLE statement. New tables can be defined by providing
+column names and their types, or created from the results of a SELECT
+query using \verb{CREATE TABLE ... AS}.
 }
+\examples{
+sql_create_table("new_table",
+                 variables = c(col1 = "integer", col2 = "text"))
+q <- sql(select("*"),
+         from("original"))
+sql_create_table("new_table", query = q)
+
+}
+\seealso{
+SQL data manipulation functions:
+\code{\link[=sql_delete]{sql_delete()}},
+\code{\link[=sql_insert]{sql_insert()}},
+\code{\link[=sql_update]{sql_update()}}
+}
+\concept{dml}

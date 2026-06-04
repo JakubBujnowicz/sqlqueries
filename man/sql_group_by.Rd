@@ -17,5 +17,22 @@ A character string representing the SQL GROUP BY statement, with S3
 class 'sql_group_by'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Groups rows by the specified columns for use with aggregate functions.
+Multiple columns can be provided and are included in the GROUP BY clause
+in the order given.
 }
+\examples{
+sql_group_by("a")
+sql_group_by("a", "b")
+
+}
+\seealso{
+SQL query statements:
+\code{\link[=sql_from]{sql_from()}},
+\code{\link[=sql_having]{sql_having()}},
+\code{\link[=sql_join]{sql_join()}},
+\code{\link[=sql_order_by]{sql_order_by()}},
+\code{\link[=sql_select]{sql_select()}},
+\code{\link[=sql_where]{sql_where()}}
+}
+\concept{building_blocks}

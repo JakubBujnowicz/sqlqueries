@@ -1,6 +1,8 @@
 #' Construct a SQL UPDATE statement
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Builds an UPDATE statement to modify existing rows in a table. The
+#' `set` parameter defines column-value pairs to assign. Character values
+#' are quoted, missing values are rendered as NULL.
 #'
 #' @param table a single string with the name of the table to update.
 #' @param set a list, every element must be named (with unique names) and
@@ -9,6 +11,14 @@
 #' @return A character string representing the SQL UPDATE statement, with S3
 #'   class 'sql_update'.
 #' @export
+#'
+#' @family dml
+#'
+#' @examples
+#' sql_update(table = "test_table",
+#'            set = list(b = "z"))
+#' sql_update(table = "test_table",
+#'            set = list(a = 1, b = "w"))
 #'
 sql_update <- function(table, set)
 {

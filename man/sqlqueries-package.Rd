@@ -4,9 +4,17 @@
 \name{sqlqueries-package}
 \alias{sqlqueries}
 \alias{sqlqueries-package}
-\title{sqlqueries: What the Package Does (One Line, Title Case)}
+\title{sqlqueries: Programmatic SQL Query Construction}
 \description{
-What the package does (one paragraph).
+A functional framework for composing SQL statements from R expressions using an S3 class hierarchy and non-standard evaluation.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/JakubBujnowicz/sqlqueries}
+  \item Report bugs at \url{https://github.com/JakubBujnowicz/sqlqueries/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Jakub Bujnowicz \email{bujnowiczgithub@gmail.com}

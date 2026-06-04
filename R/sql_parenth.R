@@ -1,12 +1,20 @@
 #' Wrap `sql` objects in parentheses
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Wraps a SQL expression in parentheses. Useful for grouping conditions
+#' in logical expressions to control operator precedence, particularly
+#' when mixing AND and OR operators.
 #'
 #' @param x a single string, in particular any `sql` object.
 #'
 #' @return A character string wrapped in parentheses, with S3
 #'   class 'sql_parenth'.
 #' @export
+#'
+#' @family sql_utilities
+#'
+#' @examples
+#' sql_parenth("a = 1")
+#' sql_parenth("x = 1" %AND% "y = 2")
 #'
 sql_parenth <- function(x)
 {

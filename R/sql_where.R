@@ -1,6 +1,8 @@
 #' Construct a SQL WHERE statement
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Filters rows by logical conditions. Accepts one or more conditions that
+#' are combined with AND. Supports complex nested logic via `%AND%` and
+#' `%OR%` operators, as well as pre-composed `sql_logical` objects.
 #'
 #' @param ... logical conditions to include. Can be character strings
 #'   or results of other `sql` objects (e.g. [sqlqueries::sql_or()]).
@@ -9,6 +11,13 @@
 #' @return A character string representing the SQL WHERE statement, with S3
 #'   class 'sql_where'.
 #' @export
+#'
+#' @family building_blocks
+#'
+#' @examples
+#' sql_where("a = 1")
+#' sql_where("a = 1", "b = 2")
+#' sql_where("x = 1" %AND% "y = 2")
 #'
 sql_where <- function(..., .defuse = TRUE)
 {

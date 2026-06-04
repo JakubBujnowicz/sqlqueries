@@ -1,7 +1,7 @@
-#' Internal function for creating logical conditions
+#' Create logical SQL conditions
 #'
-#' This works as a template for creating logical conditions in a object-oriented
-#' matter, e.g. AND or OR.
+#' `sql_logical()` serves as a template for creating logical conditions in a
+#' composable manner, e.g. AND or OR.
 #'
 #' @param x,y non-empty strings, input arguments for the logical operator.
 #' @param operator a non-empty string, name of the logical operator to be
@@ -11,6 +11,14 @@
 #'   class 'sql_logical'.
 #'
 #' @export
+#'
+#' @examples
+#' sql_logical("x = 1", "y = 1", "or")
+#' sql_and("x = 1", "y = 2")
+#' sql_or("z = 2", "w = 3")
+#' "x = 1" %AND% "y = 2"
+#' "z = 2" %OR% "w = 3"
+#' sql_condition("x = 1", "y = 2")
 #'
 sql_logical <- function(x, y, operator)
 {
@@ -99,6 +107,8 @@ sql_or <- function(x, y)
 #' Internal parser for `sql_logical` objects
 #'
 #' @inheritParams sql_parse
+#' @param break_lines a logical value. If `TRUE`, conditions are separated by
+#'   new lines instead of spaces.
 #' @keywords internal
 #'
 .parse.sql_logical <- function(x, fields, break_lines = TRUE, ...)

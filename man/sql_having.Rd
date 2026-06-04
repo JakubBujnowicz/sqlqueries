@@ -18,5 +18,22 @@ A character string representing the SQL HAVING statement, with S3
 class 'sql_having'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Filters grouped rows after a GROUP BY clause. Accepts aggregate
+conditions that are combined with AND, supporting the same logical
+composition patterns as \code{\link[=sql_where]{sql_where()}}.
 }
+\examples{
+sql_having("s > 3")
+sql_having("s > 3", "t > 5")
+
+}
+\seealso{
+SQL query statements:
+\code{\link[=sql_from]{sql_from()}},
+\code{\link[=sql_group_by]{sql_group_by()}},
+\code{\link[=sql_join]{sql_join()}},
+\code{\link[=sql_order_by]{sql_order_by()}},
+\code{\link[=sql_select]{sql_select()}},
+\code{\link[=sql_where]{sql_where()}}
+}
+\concept{building_blocks}

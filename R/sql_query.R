@@ -1,6 +1,9 @@
 #' Create SQL queries
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Combines multiple SQL clauses (SELECT, FROM, WHERE, etc.) into a
+#' single complete query string. Clauses can be passed as individual
+#' arguments or composed using the `+` operator. Use [sql()] as a
+#' shorthand. Supports variable interpolation via the `.glue` parameter.
 #'
 #' `sql()` is a shorthand for `sql_query()`.
 #'
@@ -11,6 +14,14 @@
 #'
 #' @return A character string with a SQL query, with S3 class 'sql_query'.
 #' @export
+#'
+#' @examples
+#' sql_query(sql_select("*"),
+#'           sql_from("dt"))
+#' sql(select("*"),
+#'     from("dt"))
+#' sql_select("*") +
+#'     sql_from("dt")
 #'
 sql_query <- function(..., .glue = NULL, .defuse = TRUE)
 {
@@ -40,6 +51,7 @@ sql_query <- function(..., .glue = NULL, .defuse = TRUE)
 
 
 #' @rdname sql_query
+#' @export
 #'
 sql <- sql_query
 

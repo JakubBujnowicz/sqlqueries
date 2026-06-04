@@ -18,5 +18,23 @@ A character string representing the SQL WHERE statement, with S3
 class 'sql_where'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Filters rows by logical conditions. Accepts one or more conditions that
+are combined with AND. Supports complex nested logic via \verb{\%AND\%} and
+\verb{\%OR\%} operators, as well as pre-composed \code{sql_logical} objects.
 }
+\examples{
+sql_where("a = 1")
+sql_where("a = 1", "b = 2")
+sql_where("x = 1" \%AND\% "y = 2")
+
+}
+\seealso{
+SQL query statements:
+\code{\link[=sql_from]{sql_from()}},
+\code{\link[=sql_group_by]{sql_group_by()}},
+\code{\link[=sql_having]{sql_having()}},
+\code{\link[=sql_join]{sql_join()}},
+\code{\link[=sql_order_by]{sql_order_by()}},
+\code{\link[=sql_select]{sql_select()}}
+}
+\concept{building_blocks}

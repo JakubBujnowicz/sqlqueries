@@ -22,8 +22,20 @@ should be defused. For more information about defusing, see \link{sql_defusing}.
 A character string with a SQL query, with S3 class 'sql_query'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Combines multiple SQL clauses (SELECT, FROM, WHERE, etc.) into a
+single complete query string. Clauses can be passed as individual
+arguments or composed using the \code{+} operator. Use \code{\link[=sql]{sql()}} as a
+shorthand. Supports variable interpolation via the \code{.glue} parameter.
 }
 \details{
 \code{sql()} is a shorthand for \code{sql_query()}.
+}
+\examples{
+sql_query(sql_select("*"),
+          sql_from("dt"))
+sql(select("*"),
+    from("dt"))
+sql_select("*") +
+    sql_from("dt")
+
 }

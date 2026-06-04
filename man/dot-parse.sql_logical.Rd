@@ -13,6 +13,9 @@
 within \code{.sql_parse()} wrapper to \code{attributes(x)}. The attributes
 are set within object constructors.}
 
+\item{break_lines}{a logical value. If \code{TRUE}, conditions are separated by
+new lines instead of spaces.}
+
 \item{...}{another arguments passed to \code{.parse()} and corresponding methods.}
 }
 \description{

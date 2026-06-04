@@ -24,5 +24,25 @@ A character string representing the SQL INSERT statement, with S3
 class 'sql_insert'.
 }
 \description{
-Create a SQL INSERT statement
+Builds an INSERT statement to add rows to a table. Accepts data as a
+data frame for VALUES-style inserts, or a \code{sql_query} object for
+insert-from-select. The \code{columns} parameter restricts which columns
+receive data.
 }
+\examples{
+dt <- data.frame(a = 1:2, b = c("x", "y"))
+
+sql_insert(into = "test_table", values = dt)
+q <- sql(select("*"),
+         from("source"),
+         where("a > 1"))
+sql_insert(into = "target", query = q)
+
+}
+\seealso{
+SQL data manipulation functions:
+\code{\link[=sql_create_table]{sql_create_table()}},
+\code{\link[=sql_delete]{sql_delete()}},
+\code{\link[=sql_update]{sql_update()}}
+}
+\concept{dml}

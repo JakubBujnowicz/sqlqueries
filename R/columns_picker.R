@@ -1,6 +1,8 @@
 #' Internal column picker helper
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Processes `...` arguments into a character vector of column names using
+#' non-standard evaluation. Supports column aliases via named arguments and
+#' short-form function names (e.g. `vars()`, `case()`) through defusing.
 #'
 #' @eval .docs_dots_columns(purpose = "names of columns", aliases = TRUE)
 #' @template param_dot-defuse

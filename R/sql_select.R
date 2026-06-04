@@ -1,6 +1,8 @@
 #' Construct a SQL SELECT statement
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Specifies the columns to retrieve in a query. Accepts bare column names,
+#' expressions, or aliased names. Supports DISTINCT for unique rows and TOP
+#' for limiting results, including TOP PERCENT and WITH TIES modifiers.
 #'
 #' @eval .docs_dots_columns(purpose = "columns to select", aliases = TRUE)
 #' @param .distinct a logical value. If `TRUE`, adds "DISTINCT" to the query.
@@ -14,6 +16,13 @@
 #' @return A character string representing the SQL SELECT statement, with S3
 #'   class 'sql_select'.
 #' @export
+#'
+#' @family building_blocks
+#'
+#' @examples
+#' sql_select("a", "b")
+#' sql_select("*", .distinct = TRUE)
+#' sql_select("a", "b", .top = 5)
 #'
 sql_select <- function(..., .distinct = FALSE,
                        .top = NULL, .top_percent = FALSE, .top_with_ties = FALSE,

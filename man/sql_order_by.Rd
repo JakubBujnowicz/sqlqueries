@@ -17,5 +17,22 @@ A character string representing the SQL ORDER BY statement, with S3
 class 'sql_order_by'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Sorts the result set by the specified columns. Each column can be
+sorted in ascending (default) or descending order by prefixing with
+a minus sign via \code{\link[=sql_vars]{sql_vars()}}.
 }
+\examples{
+sql_order_by("a", "b")
+sql_order_by(vars(a, -b))
+
+}
+\seealso{
+SQL query statements:
+\code{\link[=sql_from]{sql_from()}},
+\code{\link[=sql_group_by]{sql_group_by()}},
+\code{\link[=sql_having]{sql_having()}},
+\code{\link[=sql_join]{sql_join()}},
+\code{\link[=sql_select]{sql_select()}},
+\code{\link[=sql_where]{sql_where()}}
+}
+\concept{building_blocks}

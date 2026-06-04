@@ -34,5 +34,23 @@ A character string representing the SQL SELECT statement, with S3
 class 'sql_select'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Specifies the columns to retrieve in a query. Accepts bare column names,
+expressions, or aliased names. Supports DISTINCT for unique rows and TOP
+for limiting results, including TOP PERCENT and WITH TIES modifiers.
 }
+\examples{
+sql_select("a", "b")
+sql_select("*", .distinct = TRUE)
+sql_select("a", "b", .top = 5)
+
+}
+\seealso{
+SQL query statements:
+\code{\link[=sql_from]{sql_from()}},
+\code{\link[=sql_group_by]{sql_group_by()}},
+\code{\link[=sql_having]{sql_having()}},
+\code{\link[=sql_join]{sql_join()}},
+\code{\link[=sql_order_by]{sql_order_by()}},
+\code{\link[=sql_where]{sql_where()}}
+}
+\concept{building_blocks}

@@ -22,5 +22,20 @@ A character string representing the SQL DELETE statement, with S3
 class 'sql_delete'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Builds a DELETE statement to remove rows from a table. Conditions can
+be passed directly as arguments or via a pre-built \code{\link[=sql_where]{sql_where()}} object.
+If both are provided, they are combined with AND.
 }
+\examples{
+sql_delete(from = "test_table", "a = 1")
+wh <- sql_where("a > 3")
+sql_delete(from = "test_table", where = wh)
+
+}
+\seealso{
+SQL data manipulation functions:
+\code{\link[=sql_create_table]{sql_create_table()}},
+\code{\link[=sql_insert]{sql_insert()}},
+\code{\link[=sql_update]{sql_update()}}
+}
+\concept{dml}

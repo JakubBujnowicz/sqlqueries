@@ -1,5 +1,10 @@
 #' Create a SQL INSERT statement
 #'
+#' Builds an INSERT statement to add rows to a table. Accepts data as a
+#' data frame for VALUES-style inserts, or a `sql_query` object for
+#' insert-from-select. The `columns` parameter restricts which columns
+#' receive data.
+#'
 #' @param into a single non-empty string, the name of a table to insert into.
 #' @param values a data frame with at least one row, used as VALUES for
 #'   inserting. Values (columns) from the data frame are coerced into character
@@ -12,6 +17,17 @@
 #' @return A character string representing the SQL INSERT statement, with S3
 #'   class 'sql_insert'.
 #' @export
+#'
+#' @family dml
+#'
+#' @examples
+#' dt <- data.frame(a = 1:2, b = c("x", "y"))
+#'
+#' sql_insert(into = "test_table", values = dt)
+#' q <- sql(select("*"),
+#'          from("source"),
+#'          where("a > 1"))
+#' sql_insert(into = "target", query = q)
 #'
 sql_insert <- function(into, values = NULL, query = NULL, columns = NULL)
 {

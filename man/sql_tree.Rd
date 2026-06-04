@@ -17,3 +17,10 @@ This function can be used to explore internal structure of \code{sql} objects,
 including data stored in object \code{fields} attribute. When used e.g. on \code{sql_query}
 objects, the entire tree is returned as a nested list.
 }
+\examples{
+sql_tree(sql_select("*"))
+sql_tree(
+    sql_select("*") +
+        sql_from("dt"))
+
+}

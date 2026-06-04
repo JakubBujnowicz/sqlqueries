@@ -1,12 +1,23 @@
 #' Create a SQL tuple
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Creates a SQL tuple, representing a list of values. A single vector
+#' becomes a value list like `(1, 2, 3)`. Multiple vectors of the same
+#' length produce row-wise tuples like `((1, 'a'), (2, 'b'))`. Used
+#' internally by [sql_in()] and [sql_insert()].
 #'
 #' @param ... atomic vectors to create a tuple from. They all must be of
 #'   the same length.
 #'
-#' @return A single string with a SQL tuple.
+#' @return A character string representing a SQL tuple, with S3 class
+#'   'sql_tuple'.
 #' @export
+#'
+#' @family sql_utilities
+#'
+#' @examples
+#' sql_tuple(1:3)
+#' sql_tuple(c("a", "b", "c"))
+#' sql_tuple(c(1, NA, 3), c("a", "b", NA))
 #'
 sql_tuple <- function(...)
 {

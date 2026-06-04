@@ -1,11 +1,17 @@
 #' Print SQL objects
 #'
-#' DESCRIPTION TO BE WRITTEN.
+#' Prints a SQL object to the console with a decorative header showing
+#' the package name and a dashed line separator above and below the SQL
+#' text. This method is automatically invoked when a `sql` object is
+#' printed at the command line.
 #'
 #' @inheritParams base::print
 #'
 #' @return Returns `x` invisibly.
 #' @export
+#'
+#' @examples
+#' print(sql_select("*"))
 #'
 print.sql <- function(x, ...)
 {
@@ -30,6 +36,14 @@ print.sql <- function(x, ...)
 #'
 #' @return A `sql_query` object.
 #' @export
+#'
+#' @examples
+#' sql_select("*") +
+#'     sql_from("dt")
+#'
+#' sql_select("*") +
+#'     sql_from("dt") +
+#'     sql_where("a > 1")
 #'
 `+.sql` <- function(e1, e2)
 {

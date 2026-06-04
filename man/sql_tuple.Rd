@@ -11,8 +11,26 @@ sql_tuple(...)
 the same length.}
 }
 \value{
-A single string with a SQL tuple.
+A character string representing a SQL tuple, with S3 class
+'sql_tuple'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Creates a SQL tuple, representing a list of values. A single vector
+becomes a value list like \verb{(1, 2, 3)}. Multiple vectors of the same
+length produce row-wise tuples like \verb{((1, 'a'), (2, 'b'))}. Used
+internally by \code{\link[=sql_in]{sql_in()}} and \code{\link[=sql_insert]{sql_insert()}}.
 }
+\examples{
+sql_tuple(1:3)
+sql_tuple(c("a", "b", "c"))
+sql_tuple(c(1, NA, 3), c("a", "b", NA))
+
+}
+\seealso{
+SQL utility functions:
+\code{\link[=sql_case]{sql_case()}},
+\code{\link[=sql_glue]{sql_glue()}},
+\code{\link[=sql_parenth]{sql_parenth()}},
+\code{\link[=sql_vars]{sql_vars()}}
+}
+\concept{sql_utilities}

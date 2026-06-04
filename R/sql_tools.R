@@ -9,6 +9,12 @@
 #' @return A list representing the tree.
 #' @export
 #'
+#' @examples
+#' sql_tree(sql_select("*"))
+#' sql_tree(
+#'     sql_select("*") +
+#'         sql_from("dt"))
+#'
 sql_tree <- function(x)
 {
     checkmate::assert_class(x, classes = "sql")
@@ -37,6 +43,8 @@ sql_tree <- function(x)
 #'
 #' @return A character vector of variables.
 #' @export
+#'
+#' @family sql_utilities
 #'
 #' @examples
 #' sql_vars(Var1 = FirstVariable, Var2)
@@ -68,6 +76,10 @@ sql_vars <- function(...)
 #'
 #' @return Either `TRUE` or `FALSE`.
 #' @export
+#'
+#' @examples
+#' is_sql(sql_select("*"))
+#' is_sql("raw string")
 #'
 is_sql <- function(x)
 {

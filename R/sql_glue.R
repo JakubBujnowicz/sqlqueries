@@ -13,6 +13,12 @@
 #'   are preserved.
 #' @export
 #'
+#' @family sql_utilities
+#'
+#' @examples
+#' sql_glue("SELECT * FROM {table}",
+#'         .x = list(table = "my_table"))
+#'
 sql_glue <- function(sql, .x, ...)
 {
     checkmate::assert(

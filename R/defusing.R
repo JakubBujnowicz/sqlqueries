@@ -2,7 +2,7 @@
 #'
 #' In `sqlqueries` package, defusing is used to simplify writing queries using
 #' the power of Non-Standard Evaluation (NSE). This allows for:
-#' * using only keywords instead defused environments,
+#' * using short-form keywords instead of fully qualified function names,
 #'   e.g. `sql(select("*"))` instead of `sql(sql_select("*"))`,
 #' * wrapping elements of queries in parentheses preserves them in the query,
 #'   e.g. `sql_condition(("a" %OR% "b") %AND% "c")`,

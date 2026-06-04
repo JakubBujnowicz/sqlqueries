@@ -2,7 +2,7 @@
 % Please edit documentation in R/sql_group_by.R
 \name{.parse.sql_group_by}
 \alias{.parse.sql_group_by}
-\title{Internal parser for \code{sql_from} objects}
+\title{Internal parser for \code{sql_group_by} objects}
 \usage{
 \method{.parse}{sql_group_by}(x, fields, ...)
 }
@@ -16,6 +16,6 @@ are set within object constructors.}
 \item{...}{another arguments passed to \code{.parse()} and corresponding methods.}
 }
 \description{
-Internal parser for \code{sql_from} objects
+Internal parser for \code{sql_group_by} objects
 }
 \keyword{internal}

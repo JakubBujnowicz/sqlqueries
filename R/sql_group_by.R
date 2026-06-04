@@ -1,6 +1,8 @@
 #' Construct a SQL GROUP BY statement
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Groups rows by the specified columns for use with aggregate functions.
+#' Multiple columns can be provided and are included in the GROUP BY clause
+#' in the order given.
 #'
 #' @eval .docs_dots_columns(purpose = "columns to group by")
 #' @template param_dot-defuse
@@ -8,6 +10,12 @@
 #' @return A character string representing the SQL GROUP BY statement, with S3
 #'   class 'sql_group_by'.
 #' @export
+#'
+#' @family building_blocks
+#'
+#' @examples
+#' sql_group_by("a")
+#' sql_group_by("a", "b")
 #'
 sql_group_by <- function(..., .defuse = TRUE)
 {
@@ -22,7 +30,7 @@ sql_group_by <- function(..., .defuse = TRUE)
 }
 
 
-#' Internal parser for `sql_from` objects
+#' Internal parser for `sql_group_by` objects
 #'
 #' @inheritParams sql_parse
 #' @keywords internal

@@ -16,3 +16,12 @@ A \code{sql_query} object.
 Addition operator serves as a wrapper for composing two elements into a
 single \code{\link[=sql_query]{sql_query()}}.
 }
+\examples{
+sql_select("*") +
+    sql_from("dt")
+
+sql_select("*") +
+    sql_from("dt") +
+    sql_where("a > 1")
+
+}

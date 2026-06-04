@@ -15,5 +15,12 @@
 Returns \code{x} invisibly.
 }
 \description{
-DESCRIPTION TO BE WRITTEN.
+Prints a SQL object to the console with a decorative header showing
+the package name and a dashed line separator above and below the SQL
+text. This method is automatically invoked when a \code{sql} object is
+printed at the command line.
+}
+\examples{
+print(sql_select("*"))
+
 }

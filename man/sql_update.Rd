@@ -17,5 +17,21 @@ A character string representing the SQL UPDATE statement, with S3
 class 'sql_update'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Builds an UPDATE statement to modify existing rows in a table. The
+\code{set} parameter defines column-value pairs to assign. Character values
+are quoted, missing values are rendered as NULL.
 }
+\examples{
+sql_update(table = "test_table",
+           set = list(b = "z"))
+sql_update(table = "test_table",
+           set = list(a = 1, b = "w"))
+
+}
+\seealso{
+SQL data manipulation functions:
+\code{\link[=sql_create_table]{sql_create_table()}},
+\code{\link[=sql_delete]{sql_delete()}},
+\code{\link[=sql_insert]{sql_insert()}}
+}
+\concept{dml}

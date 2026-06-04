@@ -12,7 +12,7 @@ sql_join(table, on, type = "inner", alias = NULL)
 \item{on}{a single, non-empty string with a condition to join on.}
 
 \item{type}{a single string, the type of join. Possible values are:
-\code{"inner"}, \code{"left"}, \code{"right"}, \code{"full"}, \code{"key"}).}
+\code{"inner"}, \code{"left"}, \code{"right"}, \code{"full"}, \code{"key"}.}
 
 \item{alias}{a single string or \code{NULL}. If provided, serves as an alias for
 the joined table.}
@@ -22,5 +22,24 @@ A character string representing the SQL JOIN statement, with S3
 class 'sql_join'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Adds a JOIN clause to a query. Supports INNER, LEFT, RIGHT, FULL, and
+KEY joins. The table to join can be a plain name, an aliased table, or
+a subquery. The ON condition defines how the tables relate.
 }
+\examples{
+sql_join("dt2", on = "dt1.a = dt2.a")
+sql_join("dt2",
+         alias = "d",
+         on = "dt1.a = d.a")
+
+}
+\seealso{
+SQL query statements:
+\code{\link[=sql_from]{sql_from()}},
+\code{\link[=sql_group_by]{sql_group_by()}},
+\code{\link[=sql_having]{sql_having()}},
+\code{\link[=sql_order_by]{sql_order_by()}},
+\code{\link[=sql_select]{sql_select()}},
+\code{\link[=sql_where]{sql_where()}}
+}
+\concept{building_blocks}

@@ -29,3 +29,16 @@ objects.
 \details{
 Note that underlying \code{\link[glue:glue_data]{glue::glue_data()}} is called with \code{.trim = FALSE}.
 }
+\examples{
+sql_glue("SELECT * FROM {table}",
+        .x = list(table = "my_table"))
+
+}
+\seealso{
+SQL utility functions:
+\code{\link[=sql_case]{sql_case()}},
+\code{\link[=sql_parenth]{sql_parenth()}},
+\code{\link[=sql_tuple]{sql_tuple()}},
+\code{\link[=sql_vars]{sql_vars()}}
+}
+\concept{sql_utilities}

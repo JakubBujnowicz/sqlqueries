@@ -1,6 +1,8 @@
 #' Construct a SQL CASE WHEN statement
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Creates a CASE WHEN expression for conditional logic in SQL. Takes a
+#' sequence of condition-value pairs: each condition maps to a result,
+#' and an optional ELSE provides a fallback when no condition matches.
 #'
 #' @param ... an atomic vector of conditions and values. Must be of even length.
 #'   Represents a sequence of `when1`, `then1`, `when2`, `then2` and so on...
@@ -10,6 +12,13 @@
 #' @return A character string representing the SQL CASE WHEN statement, with S3
 #'   class 'sql_case'.
 #' @export
+#'
+#' @family sql_utilities
+#'
+#' @examples
+#' sql_case("a = 1", 10,
+#'          "a = 2", 20,
+#'          .else = 30)
 #'
 sql_case <- function(..., .else = NULL)
 {

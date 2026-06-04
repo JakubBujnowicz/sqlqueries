@@ -1,6 +1,8 @@
 #' Construct a SQL DELETE statement
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Builds a DELETE statement to remove rows from a table. Conditions can
+#' be passed directly as arguments or via a pre-built [sql_where()] object.
+#' If both are provided, they are combined with AND.
 #'
 #' @param from a single, non-empty string with a table name to delete from.
 #' @param ... a vector of conditions, passed to [sqlqueries::sql_condition()].
@@ -11,6 +13,13 @@
 #' @return A character string representing the SQL DELETE statement, with S3
 #'   class 'sql_delete'.
 #' @export
+#'
+#' @family dml
+#'
+#' @examples
+#' sql_delete(from = "test_table", "a = 1")
+#' wh <- sql_where("a > 3")
+#' sql_delete(from = "test_table", where = wh)
 #'
 sql_delete <- function(from, ..., where = NULL, .defuse = TRUE)
 {

@@ -1,12 +1,20 @@
 #' Construct a SQL HAVING statement
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Filters grouped rows after a GROUP BY clause. Accepts aggregate
+#' conditions that are combined with AND, supporting the same logical
+#' composition patterns as [sql_where()].
 #'
 #' @inheritParams sql_where
 #'
 #' @return A character string representing the SQL HAVING statement, with S3
 #'   class 'sql_having'.
 #' @export
+#'
+#' @family building_blocks
+#'
+#' @examples
+#' sql_having("s > 3")
+#' sql_having("s > 3", "t > 5")
 #'
 sql_having <- function(..., .defuse = TRUE)
 {

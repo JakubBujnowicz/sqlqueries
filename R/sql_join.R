@@ -1,17 +1,27 @@
 #' Construct a SQL JOIN statement
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Adds a JOIN clause to a query. Supports INNER, LEFT, RIGHT, FULL, and
+#' KEY joins. The table to join can be a plain name, an aliased table, or
+#' a subquery. The ON condition defines how the tables relate.
 #'
 #' @param table a single, non-empty string with the name of the table to join.
 #' @param on a single, non-empty string with a condition to join on.
 #' @param type a single string, the type of join. Possible values are:
-#'    `"inner"`, `"left"`, `"right"`, `"full"`, `"key"`).
+#'    `"inner"`, `"left"`, `"right"`, `"full"`, `"key"`.
 #' @param alias a single string or `NULL`. If provided, serves as an alias for
 #'  the joined table.
 #'
 #' @return A character string representing the SQL JOIN statement, with S3
 #'   class 'sql_join'.
 #' @export
+#'
+#' @family building_blocks
+#'
+#' @examples
+#' sql_join("dt2", on = "dt1.a = dt2.a")
+#' sql_join("dt2",
+#'          alias = "d",
+#'          on = "dt1.a = d.a")
 #'
 sql_join <- function(table, on, type = "inner", alias = NULL)
 {

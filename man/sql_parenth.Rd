@@ -14,5 +14,20 @@ A character string wrapped in parentheses, with S3
 class 'sql_parenth'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Wraps a SQL expression in parentheses. Useful for grouping conditions
+in logical expressions to control operator precedence, particularly
+when mixing AND and OR operators.
 }
+\examples{
+sql_parenth("a = 1")
+sql_parenth("x = 1" \%AND\% "y = 2")
+
+}
+\seealso{
+SQL utility functions:
+\code{\link[=sql_case]{sql_case()}},
+\code{\link[=sql_glue]{sql_glue()}},
+\code{\link[=sql_tuple]{sql_tuple()}},
+\code{\link[=sql_vars]{sql_vars()}}
+}
+\concept{sql_utilities}

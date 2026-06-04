@@ -23,3 +23,11 @@ sql_vars(Var1 = FirstVariable, Var2)
 sql_vars(-FirstVariable, Var2)
 
 }
+\seealso{
+SQL utility functions:
+\code{\link[=sql_case]{sql_case()}},
+\code{\link[=sql_glue]{sql_glue()}},
+\code{\link[=sql_parenth]{sql_parenth()}},
+\code{\link[=sql_tuple]{sql_tuple()}}
+}
+\concept{sql_utilities}

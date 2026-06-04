@@ -7,7 +7,7 @@
 In \code{sqlqueries} package, defusing is used to simplify writing queries using
 the power of Non-Standard Evaluation (NSE). This allows for:
 \itemize{
-\item using only keywords instead defused environments,
+\item using short-form keywords instead of fully qualified function names,
 e.g. \code{sql(select("*"))} instead of \code{sql(sql_select("*"))},
 \item wrapping elements of queries in parentheses preserves them in the query,
 e.g. \code{sql_condition(("a" \%OR\% "b") \%AND\% "c")},

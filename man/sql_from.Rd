@@ -20,5 +20,23 @@ A character string representing the SQL FROM statement, with S3
 class 'sql_from'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Declares the source table for a query. Accepts a plain table name, a
+named vector to define an alias, or a subquery (any \code{sql_query} object)
+which is automatically wrapped in parentheses for use as a derived table.
 }
+\examples{
+sql_from("dt")
+sql_from("dt", alias = "t")
+sql_from(c(t = "dt"))
+
+}
+\seealso{
+SQL query statements:
+\code{\link[=sql_group_by]{sql_group_by()}},
+\code{\link[=sql_having]{sql_having()}},
+\code{\link[=sql_join]{sql_join()}},
+\code{\link[=sql_order_by]{sql_order_by()}},
+\code{\link[=sql_select]{sql_select()}},
+\code{\link[=sql_where]{sql_where()}}
+}
+\concept{building_blocks}

@@ -1,6 +1,9 @@
 #' Construct a SQL IN statement
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Creates an IN condition that checks whether a column value matches any
+#' element in a given set. The set can be a vector of values, which is
+#' automatically formatted as a SQL tuple. The `%IN%` infix operator
+#' provides a shorthand alternative.
 #'
 #' `x %IN% y` is a wrapper for `sql_in(x, vector = y)`.
 #'
@@ -12,6 +15,11 @@
 #' @return A character string representing the SQL IN statement, with S3
 #'   class 'sql_in'.
 #' @export
+#'
+#' @examples
+#' sql_in("col1", 1:3)
+#' sql_in("col1", c("a", "b", "c"))
+#' "col1" %IN% 1:3
 #'
 sql_in <- function(x, vector)
 {

@@ -16,6 +16,8 @@ should be defused. For more information about defusing, see \link{sql_defusing}.
 A character vector of column names.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Processes \code{...} arguments into a character vector of column names using
+non-standard evaluation. Supports column aliases via named arguments and
+short-form function names (e.g. \code{vars()}, \code{case()}) through defusing.
 }
 \keyword{internal}

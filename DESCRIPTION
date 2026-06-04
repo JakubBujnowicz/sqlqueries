@@ -1,12 +1,15 @@
 Package: sqlqueries
-Title: What the Package Does (One Line, Title Case)
+Title: Programmatic SQL Query Construction
 Version: 0.0.0.9001
 Authors@R: 
     person("Jakub", "Bujnowicz", , "bujnowiczgithub@gmail.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Description: A functional framework for composing SQL statements from
+    R expressions using an S3 class hierarchy and non-standard evaluation.
 License: GPL-3 + file LICENSE
+URL: https://github.com/JakubBujnowicz/sqlqueries
+BugReports: https://github.com/JakubBujnowicz/sqlqueries/issues
 Depends: 
-    R (>= 2.10)
+    R (>= 4.0.0)
 Imports: 
     checkmate,
     glue,
@@ -14,7 +17,13 @@ Imports:
     stringr,
     utils
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
+Roxygen: list(
+    markdown = TRUE,
+    rd_family_title = list(
+        building_blocks = "SQL query statements",
+        dml = "SQL data manipulation functions",
+        sql_utilities = "SQL utility functions")
+    )
 Suggests: 
     data.table,
     DBI,

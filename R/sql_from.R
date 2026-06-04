@@ -1,6 +1,8 @@
 #' Construct a SQL FROM statement
 #'
-#' DESCRIPTION TO BE WRITTEN
+#' Declares the source table for a query. Accepts a plain table name, a
+#' named vector to define an alias, or a subquery (any `sql_query` object)
+#' which is automatically wrapped in parentheses for use as a derived table.
 #'
 #' @param table a single string with the name of the table. In particular, a
 #'  `sql_query` object may be passed as well, it is then automatically
@@ -12,6 +14,13 @@
 #' @return A character string representing the SQL FROM statement, with S3
 #'   class 'sql_from'.
 #' @export
+#'
+#' @family building_blocks
+#'
+#' @examples
+#' sql_from("dt")
+#' sql_from("dt", alias = "t")
+#' sql_from(c(t = "dt"))
 #'
 sql_from <- function(table, alias = NULL)
 {

@@ -15,3 +15,8 @@ Either \code{TRUE} or \code{FALSE}.
 \description{
 \code{is_sql()} checks whether an object inherits from the general \code{sql} class.
 }
+\examples{
+is_sql(sql_select("*"))
+is_sql("raw string")
+
+}

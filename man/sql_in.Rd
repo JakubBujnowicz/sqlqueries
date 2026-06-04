@@ -21,8 +21,17 @@ A character string representing the SQL IN statement, with S3
 class 'sql_in'.
 }
 \description{
-DESCRIPTION TO BE WRITTEN
+Creates an IN condition that checks whether a column value matches any
+element in a given set. The set can be a vector of values, which is
+automatically formatted as a SQL tuple. The \verb{\%IN\%} infix operator
+provides a shorthand alternative.
 }
 \details{
 \code{x \%IN\% y} is a wrapper for \code{sql_in(x, vector = y)}.
+}
+\examples{
+sql_in("col1", 1:3)
+sql_in("col1", c("a", "b", "c"))
+"col1" \%IN\% 1:3
+
 }
