@@ -15,11 +15,13 @@ Imports:
     utils
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Suggests: 
     data.table,
+    DBI,
+    RSQLite,
     spelling,
     sqldf,
     testthat (>= 3.0.0)
 Language: en-US
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

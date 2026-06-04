@@ -72,3 +72,4 @@ test_that("sql_condition() validates inputs", {
                    regexp = "following expressions were omitted")
     expect_error(sql_condition("some string", .defuse = c(FALSE, FALSE)))
 })
+

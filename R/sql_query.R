@@ -19,6 +19,13 @@ sql_query <- function(..., .glue = NULL, .defuse = TRUE)
 
     ev_exprs <- .sql_prepare(..., defuse = .defuse)
 
+    # Glue variables, must be done here and separately for every element,
+    # because if only the parsed string of sql_query() is modified, the glueing
+    # is lost after another element is added to the query
+    if (!is.null(.glue)) {
+        ev_exprs <- lapply(ev_exprs, sql_glue, .x = .glue)
+    }
+
     # Set names
     nms <- sapply(ev_exprs, .main_class)
     names(ev_exprs) <- toupper(str_remove(nms, "^sql_"))
@@ -27,9 +34,6 @@ sql_query <- function(..., .glue = NULL, .defuse = TRUE)
                      fields = ev_exprs)
     rslt <- .sql_parse(rslt)
 
-    if (!is.null(.glue)) {
-        rslt <- sql_glue(rslt, .x = .glue)
-    }
 
     return(rslt)
 }

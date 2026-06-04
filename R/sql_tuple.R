@@ -40,7 +40,9 @@ sql_tuple <- function(...)
                    function(e)
                    {
                        if (!is.numeric(e)) {
+                           nas <- is.na(e)
                            e <- paste0("'", e, "'")
+                           e[nas] <- NA_character_
                        }
 
                        return(e)

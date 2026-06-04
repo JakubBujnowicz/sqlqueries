@@ -11,5 +11,10 @@ What the package does (one paragraph).
 \author{
 \strong{Maintainer}: Jakub Bujnowicz \email{bujnowiczgithub@gmail.com}
 
+Authors:
+\itemize{
+  \item Jakub Bujnowicz \email{bujnowiczgithub@gmail.com}
+}
+
 }
 \keyword{internal}

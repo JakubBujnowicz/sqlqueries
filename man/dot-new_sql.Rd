@@ -9,7 +9,7 @@
 \arguments{
 \item{class}{a single string, the main class of a \code{sql} object, e.g. \code{"sql_select"}.}
 
-\item{fields}{}
+\item{fields}{a list of attributes (fields) of the object.}
 }
 \value{
 An empty string with a proper \code{sql} object structure, ready for parsing.

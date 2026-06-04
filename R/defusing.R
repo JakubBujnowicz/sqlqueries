@@ -10,7 +10,7 @@
 #'
 #' In case one wants to use e.g. `select()` from another package or does not want
 #' to rely on NSE, `.defuse` argument may be set to `FALSE` to disable this
-#' behaviour.
+#' behavior.
 #' Defusing is turned on by default in all functions, as this significantly shortens
 #' writing longer queries with several keywords.
 #'

@@ -3,8 +3,16 @@
 
 ## usethis namespace: start
 #' @import checkmate
-#' @import rlang
 #' @importFrom glue glue_data
+#' @importFrom rlang call_match
+#' @importFrom rlang call_name
+#' @importFrom rlang enexprs
+#' @importFrom rlang enquos
+#' @importFrom rlang eval_tidy
+#' @importFrom rlang is_call
+#' @importFrom rlang quo_get_expr
+#' @importFrom rlang quo_set_expr
+#' @importFrom rlang sym
 #' @importFrom stringr str_remove
 #' @importFrom stringr str_replace_all
 #' @importFrom utils tail
@@ -18,7 +26,8 @@ NULL
     keywords <- c("query", "select", "from", "where",
                  "and", "or", "in", "vars", "join", "having",
                  "group_by", "order_by", "tuple", "insert",
-                 "update", "delete", "create_table")
+                 "update", "delete", "create_table",
+                 "case")
     keyfuns <- paste0("sql_", keywords)
     infix_funs <- paste0("%", c("OR", "AND", "IN"), "%")
     allfuns <- c(keyfuns, infix_funs,

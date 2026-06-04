@@ -23,9 +23,9 @@ If \code{sql} was an object of \code{sql} class, the class and associated attrib
 are preserved.
 }
 \description{
-A wrapper for \code{\link[glue:glue]{glue::glue_data()}}, which preserves attributes for \code{sql}
+A wrapper for \code{\link[glue:glue_data]{glue::glue_data()}}, which preserves attributes for \code{sql}
 objects.
 }
 \details{
-Note that underlying \code{\link[glue:glue]{glue::glue_data()}} is called with \code{.trim = FALSE}.
+Note that underlying \code{\link[glue:glue_data]{glue::glue_data()}} is called with \code{.trim = FALSE}.
 }

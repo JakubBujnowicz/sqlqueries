@@ -199,7 +199,7 @@
 #' The object is modified into a proper string (non-empty) only during parsing.
 #'
 #' @param class a single string, the main class of a `sql` object, e.g. `"sql_select"`.
-#' @param fields
+#' @param fields a list of attributes (fields) of the object.
 #'
 #' @return An empty string with a proper `sql` object structure, ready for parsing.
 #' @keywords internal

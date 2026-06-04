@@ -17,7 +17,7 @@ e.g. \code{sql_condition(("a" \%OR\% "b") \%AND\% "c")},
 \details{
 In case one wants to use e.g. \code{select()} from another package or does not want
 to rely on NSE, \code{.defuse} argument may be set to \code{FALSE} to disable this
-behaviour.
+behavior.
 Defusing is turned on by default in all functions, as this significantly shortens
 writing longer queries with several keywords.
 }
