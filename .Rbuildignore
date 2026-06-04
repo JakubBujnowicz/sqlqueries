@@ -7,4 +7,6 @@
 ^codecov\.yml$
 ^man-roxygen$
 ^tars$
+^\.github$
 
+^cran-comments\.md$

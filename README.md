@@ -10,6 +10,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-CMD-check](https://github.com/JakubBujnowicz/sqlqueries/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JakubBujnowicz/sqlqueries/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/JakubBujnowicz/sqlqueries/graph/badge.svg)](https://app.codecov.io/gh/JakubBujnowicz/sqlqueries)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/sqlqueries)](https://CRAN.R-project.org/package=sqlqueries)
 <!-- badges: end -->
 
 The goal of **sqlqueries** is to build SQL queries programmatically in R

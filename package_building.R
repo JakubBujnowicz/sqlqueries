@@ -33,7 +33,6 @@ source("data-raw/data_updating.R")
 
 # Release ######################################################################
 spell_check()
-check_rhub()
 check_win_devel()
 
 # 5: Release
