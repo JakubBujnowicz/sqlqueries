@@ -15,7 +15,7 @@ devtools::document()
 # roxygen2::roxygenise(clean = TRUE)
 
 # 2: Checking
-devtools::check(document = FALSE, cran = TRUE)
+devtools::check(cran = TRUE)
 
 # 3: Testing
 devtools::test()

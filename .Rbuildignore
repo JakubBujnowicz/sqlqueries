@@ -1,7 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
-^LICENSE$
 ^misc_script.R$
 ^package_building.R$
 ^README\.Rmd$

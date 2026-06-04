@@ -1,4 +1,4 @@
-source("~/.Rprofile")
+if (file.exists("~/.Rprofile")) source("~/.Rprofile")
 
 if (interactive()) {
     .pkgs <- c("devtools", "usethis", "roxygen2")
